@@ -1,16 +1,31 @@
 import './index.css';
 import { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Development from './pages/Development';
+import Home from './pages/Homepage';
+import { ThemeProvider } from './ThemeContext';
 
 function App() {
-  const [theme, setTheme] = useState('light');
+  // Initialize theme from localStorage or default to 'dark'
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'dark';
+  });
+
+  // Update theme and persist to localStorage
+  const handleSetTheme = (newTheme) => {
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
   return (
-    <div style={{width: "100vw", height: "100vh", fontFamily: "'Sour Gummy', sans-serif"}} className={theme === "light" ? "bg-white flex justify-center items-center text-black flex-col" : "bg-black flex justify-center items-center text-white flex-col"} >
-      <img src={theme === "dark" ? "/assets/nobackgroundlogo.png" : "/assets/nobackgroundlogo.png"} alt="Logo" className="w-96" />
-      <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">CodeMelon</p>
-      <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">We are working the best to make it reality</p>
-      <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">Check back again for updates</p>
-      <button onClick={() => setTheme(theme === "light" ? "dark" : "light")} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md">Toggle Theme</button>
-    </div>
+    <ThemeProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home theme={ theme } setTheme={ handleSetTheme } />} />
+          <Route path="*" element={<Development theme={theme} setTheme={handleSetTheme} />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 }
 
