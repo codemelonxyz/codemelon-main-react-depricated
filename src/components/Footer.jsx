@@ -6,10 +6,10 @@ function Footer() {
   const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
   const footerClass =
-    theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-[#AC8968] text-black';
+    theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-black';
 
   return (
-    <footer className={`w-full py-8 ${footerClass} mt-8`}>
+    <footer className={`w-full py-8 ${footerClass}`}>
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-between">
           {/* About Section */}
@@ -83,19 +83,13 @@ function Footer() {
             <h3 className="text-lg font-semibold mb-4">Legal</h3>
             <ul>
               <li className="mb-2">
-                <button onClick={() => navigate('/privacy')} className="hover:underline">
-                  Privacy Policy
-                </button>
+                <button onClick={() => navigate('/privacy')} className="hover:underline">Privacy Policy</button>
               </li>
               <li className="mb-2">
-                <button onClick={() => navigate('/terms')} className="hover:underline">
-                  Terms of Service
-                </button>
+                <button onClick={() => navigate('/terms')} className="hover:underline">Terms of Service</button>
               </li>
               <li className="mb-2">
-                <button onClick={() => navigate('/cookies')} className="hover:underline">
-                  Cookie Policy
-                </button>
+                <button onClick={() => navigate('/cookies')} className="hover:underline">Cookie Policy</button>
               </li>
             </ul>
           </div>

@@ -13,9 +13,9 @@ function Navbar() {
   const navigate = useNavigate();
 
   const navClass =
-    theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-[#AC8968] text-black';
+    theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-black';
   const modalClass =
-    theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-[#AC8968] text-black';
+    theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-black';
 
   const handleMenuToggle = () => {
     if (isOpen) {
@@ -101,7 +101,7 @@ function Navbar() {
           className={`animate-slide-in-right px-4 py-2 rounded ${
             theme === 'dark'
               ? 'bg-gray-700 hover:bg-gray-600'
-              : 'bg-white hover:bg-gray-200'
+              : 'bg-slate-300 hover:bg-gray-600 hover:text-white' // Reverted to original colors
           }`}
           style={{ animationDelay: '0.5s' }}
           onClick={() => navigate('/login')}
@@ -113,7 +113,7 @@ function Navbar() {
           className={`animate-slide-in-right px-4 py-2 rounded ${
             theme === 'dark'
               ? 'bg-blue-600 hover:bg-blue-500 text-white'
-              : 'bg-blue-500 hover:bg-blue-400 text-white'
+              : 'bg-blue-600 hover:bg-blue-500 text-white' // Reverted to original colors
           }`}
           style={{ animationDelay: '0.6s' }}
           onClick={() => navigate('/auth/signup')}
@@ -138,9 +138,10 @@ function Navbar() {
       {(isOpen || closing) && (
         <div
           ref={modalRef}
-          className={`absolute top-24 left-0 w-full shadow-md md:hidden ${modalClass} ${
+          className={`absolute top-[-220px] left-0 w-full shadow-md md:hidden ${modalClass} ${
             closing ? 'animate-modal-slide-up' : 'animate-modal-slide-down'
           }`}
+          style={{ zIndex: '50' }} // Ensure modal is above other elements
         >
           <button
             className="block w-full text-left px-4 py-2 hover:bg-opacity-75"
@@ -162,22 +163,24 @@ function Navbar() {
           </button>
           {/* Login Button */}
           <button
-            className={`block ml-2 w-4/6 text-left px-4 py-2 mt-2 rounded ${
+            className={`animate-slide-in-right ml-4 px-4 py-2 rounded ${
               theme === 'dark'
                 ? 'bg-gray-700 hover:bg-gray-600'
-                : 'bg-white hover:bg-gray-200'
+                : 'bg-slate-300 hover:bg-gray-600 hover:text-white' // Reverted to original colors
             }`}
-            onClick={() => navigate('/auth/login')}
+            style={{ animationDelay: '0.5s' }}
+            onClick={() => navigate('/login')}
           >
-            Login
+            Log In
           </button>
           {/* Signup Button */}
           <button
-            className={`block ml-2 w-4/6 text-left px-4 py-2 mt-2 rounded ${
+            className={`animate-slide-in-right ml-2 px-4 py-2 rounded ${
               theme === 'dark'
                 ? 'bg-blue-600 hover:bg-blue-500 text-white'
-                : 'bg-blue-500 hover:bg-blue-400 text-white'
+                : 'bg-blue-600 hover:bg-blue-500 text-white' // Reverted to original colors
             }`}
+            style={{ animationDelay: '0.6s' }}
             onClick={() => navigate('/auth/signup')}
           >
             Sign Up

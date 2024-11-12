@@ -6,6 +6,11 @@ import Home from './pages/Homepage';
 import { ThemeProvider } from './ThemeContext';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookiePolicy from './pages/CookiePolicy';
+import ContactUs from './pages/ContactUs';
+import AnimatedStartingPage from './pages/AnimatedStartingPage';
+
+
+const SITE_NAME = "CodeMelon";
 
 function App() {
   // Initialize theme from localStorage or default to 'dark'
@@ -23,9 +28,11 @@ function App() {
     <ThemeProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Home theme={ theme } setTheme={ handleSetTheme } />} />
-          <Route path="privacy" element={<PrivacyPolicy />} />
-          <Route path="cookies" element={<CookiePolicy />} />
+          <Route path="/" element={<AnimatedStartingPage siteName={SITE_NAME} />} />
+          <Route path="/home" element={<Home siteName={SITE_NAME} theme={theme} setTheme={handleSetTheme} />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/cookies" element={<CookiePolicy />} />
+          <Route path="/contact" element={<ContactUs />} />
           <Route path="*" element={<Development theme={theme} setTheme={handleSetTheme} />} />
         </Routes>
       </Router>
