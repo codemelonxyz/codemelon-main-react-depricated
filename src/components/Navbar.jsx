@@ -13,9 +13,9 @@ function Navbar() {
   const navigate = useNavigate();
 
   const navClass =
-    theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-red-100 text-black';
+    theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-[#AC8968] text-black';
   const modalClass =
-    theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-red-100 text-black';
+    theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-[#AC8968] text-black';
 
   const handleMenuToggle = () => {
     if (isOpen) {
@@ -87,7 +87,16 @@ function Navbar() {
         <button className="animate-slide-in-right" style={{ animationDelay: '0.3s' }}>
           Something
         </button>
+        {/* Privacy policy and cookie policy button */}
+        {/*  */}
+        {/* <button className="animate-slide-in-right" style={{ animationDelay: '0.4s' }} onClick={() => navigate('/privacy')}>
+          Privacy Policy
+        </button>
+        <button className="animate-slide-in-right" style={{ animationDelay: '0.5s' }} onClick={() => navigate('/cookies')}>
+          Cookie Policy
+        </button> */}
         {/* Login Button */}
+        
         <button
           className={`animate-slide-in-right px-4 py-2 rounded ${
             theme === 'dark'
@@ -111,12 +120,18 @@ function Navbar() {
         >
           Sign Up
         </button>
-        <button
+
+        {/*  */}
+        {/* Button of dark and light in the navbar */}
+        {/*  */}
+
+        {/* <button
           onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
           className="ml-4"
         >
           {theme === 'light' ? '🌙' : '☀️'}
-        </button>
+        </button> */}
+
       </div>
 
       {/* Mobile menu */}

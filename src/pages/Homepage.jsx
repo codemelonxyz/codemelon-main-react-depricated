@@ -8,7 +8,12 @@ function Homepage() {
             <div className="flex-grow">
                 Hi
             </div>
-            <Footer />
+            <Footer>
+                <div className="mt-4">
+                    <a href="/privacy" className="mr-4 underline">Privacy Policy</a>
+                    <a href="/cookies" className="underline">Cookie Policy</a>
+                </div>
+            </Footer>
         </div>
     )
 }

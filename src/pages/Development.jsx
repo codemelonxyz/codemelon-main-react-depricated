@@ -7,7 +7,7 @@ function Development() {
   return (
     <div
       style={{ width: "100vw", height: "100vh", fontFamily: "'Sour Gummy', sans-serif" }}
-      className="bg-white flex justify-center items-center text-black flex-col"
+      className={`flex justify-center items-center text-black flex-col ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-[#AC8968] text-black'}`}
     >
       <img src={theme === "dark" ? "/assets/nobackgroundlogo.png" : "/assets/nobackgroundlogo.png"} alt="Logo" className="w-96" />
       <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">CodeMelon</p>

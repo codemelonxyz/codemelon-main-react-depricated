@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Development from './pages/Development';
 import Home from './pages/Homepage';
 import { ThemeProvider } from './ThemeContext';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import CookiePolicy from './pages/CookiePolicy';
 
 function App() {
   // Initialize theme from localStorage or default to 'dark'
@@ -22,6 +24,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home theme={ theme } setTheme={ handleSetTheme } />} />
+          <Route path="privacy" element={<PrivacyPolicy />} />
+          <Route path="cookies" element={<CookiePolicy />} />
           <Route path="*" element={<Development theme={theme} setTheme={handleSetTheme} />} />
         </Routes>
       </Router>

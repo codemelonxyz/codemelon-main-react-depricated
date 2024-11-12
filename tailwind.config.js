@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       colors: {
         light: {
-          primary: '#FFC0CB', // Pink
+          primary: '#AC8968', // Updated Light Theme Color
         },
         dark: {
           primary: '#0000FF', // Blue

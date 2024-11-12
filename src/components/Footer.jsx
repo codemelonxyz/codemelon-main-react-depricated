@@ -6,7 +6,7 @@ function Footer() {
   const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
   const footerClass =
-    theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-red-100 text-black';
+    theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-[#AC8968] text-black';
 
   return (
     <footer className={`w-full py-8 ${footerClass} mt-8`}>

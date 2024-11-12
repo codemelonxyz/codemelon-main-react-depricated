@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 
 export const ThemeContext = createContext();
 
@@ -12,9 +12,9 @@ export const ThemeProvider = ({ children }) => {
     localStorage.setItem('theme', newTheme);
   };
 
-  useEffect(() => {
-    document.body.className = theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-red-100 text-black';
-  }, [theme]);
+  // useEffect(() => {
+  //   document.body.className = theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-red-100 text-black';
+  // }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme: handleSetTheme }}>
@@ -22,3 +22,5 @@ export const ThemeProvider = ({ children }) => {
     </ThemeContext.Provider>
   );
 };
+
+// No changes needed as the ThemeContext handles theme state appropriately.
