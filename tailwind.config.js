@@ -12,32 +12,30 @@ module.exports = {
     'animate-slide-in-left',
     'animate-slide-in-right',
     'animate-drop-down',
-    'animate-slide-out-up',     // Added to safelist
-    'animate-slide-out-down',   // Added to safelist
-    'animate-slide-in-up',      // Added to safelist
-    'animate-slide-in-down',    // Added to safelist
-    'animate-slide-out-down',   // Added to safelist
-    'animate-slide-out-up',     // Added to safelist
-    'animate-rotate',           // Added to safelist
-    // Add any other dynamic animation classes here
+    'animate-slide-out-up',
+    'animate-slide-out-down',
+    'animate-slide-in-up',
+    'animate-slide-in-down',
+    'animate-slide-out-down',
+    'animate-slide-out-up',
+    'animate-rotate',
   ],
   theme: {
     extend: {
       colors: {
         light: {
-          primary: '#AC8968', // Reverted to original color
+          primary: '#AC8968',
         },
         dark: {
-          primary: '#0000FF', // Blue
+          primary: '#0000FF',
         },
-        // gold: '#FFD700', // Removed gold color
-        'required-text': '#FF0000', // Red for required
-        'optional-text': '#6B7280', // Gray for optional
+        'required-text': '#FF0000',
+        'optional-text': '#6B7280',
       },
       keyframes: {
         'fall-letter': {
           '0%': { transform: 'translateY(-100vh)', opacity: '0' },
-          '60%': { transform: 'translateY(20px)', opacity: '1' },
+          '60%': { transform: 'translateY(20px)', opacity: '0.6' },
           '100%': { transform: 'translateY(0)', opacity: '1' }
         },
         'join-letters': {
