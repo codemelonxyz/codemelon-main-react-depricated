@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../ThemeContext';
+import { BackgroundBeams } from '../components/ui/background-beams';
 
 function Development() {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -7,7 +8,7 @@ function Development() {
   return (
     <div
       style={{ width: "100vw", height: "100vh", fontFamily: "'Sour Gummy', sans-serif" }}
-      className={`flex justify-center items-center text-black flex-col ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}
+      className={`flex justify-center items-center text-black flex-col ${theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'}`}
     >
       <img src={"/assets/nobackgroundlogo.png"} alt="Logo" className="w-96 animate-rotate" />
       <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">CodeMelon</p>
@@ -15,10 +16,11 @@ function Development() {
       <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">Check back again for updates</p>
       <button
         onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md z-10"
       >
         Toggle Theme
       </button>
+      {theme === "dark" ? <BackgroundBeams className="z-0" /> : null }
     </div>
   );
 }
