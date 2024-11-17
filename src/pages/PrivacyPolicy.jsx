@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../ThemeContext';
+import { BackgroundBeams } from '../components/ui/background-beams';
 
 function PrivacyPolicy() {
   const { theme } = useContext(ThemeContext);
   const pageClass =
-    theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-black';
+    theme === 'dark' ? 'bg-neutral-950 text-white' : 'bg-white text-black';
   
   return (
     <div className={`min-h-screen ${pageClass} p-8`}>
@@ -63,10 +64,11 @@ function PrivacyPolicy() {
         <p>We may update our Privacy Policy from time to time. Any changes will be posted on this page.</p>
       </section>
       
-      <section>
+      <section className="mb-4">
         <h2 className="text-2xl font-semibold mb-2">8. Contact Us</h2>
         <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:support@codemelon.xyz" className="underline">support@codemelon.xyz</a>.</p>
       </section>
+      {theme === 'dark' ? <BackgroundBeams /> : null}
     </div>
   );
 }

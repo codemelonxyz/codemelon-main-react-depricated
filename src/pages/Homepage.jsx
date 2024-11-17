@@ -14,6 +14,7 @@ function Homepage() {
                     <a href="/cookies" className="underline">Cookie Policy</a>
                 </div>
             </Footer>
+            
         </div>
     )
 }

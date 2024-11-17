@@ -13,9 +13,9 @@ function Navbar() {
   const navigate = useNavigate();
 
   const navClass =
-    theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-black';
+    theme === 'dark' ? 'bg-neutral-950 text-white' : 'bg-white text-black';
   const modalClass =
-    theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-black';
+    theme === 'dark' ? 'bg-neutral-950 text-white' : 'bg-white text-black';
 
   const handleMenuToggle = () => {
     if (isOpen) {

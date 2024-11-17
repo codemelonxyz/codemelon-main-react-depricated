@@ -44,7 +44,7 @@ function AuthPage() {
 
   return (
     <div className={`min-h-screen w-full transition-colors duration-300 ${
-      isDark ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'
+      isDark ? 'bg-neutral-950 text-white' : 'bg-gray-50 text-gray-900'
     }`}>
       <div className="absolute top-4 right-4">
         <button
