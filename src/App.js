@@ -8,6 +8,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookiePolicy from './pages/CookiePolicy';
 import ContactUs from './pages/ContactUs';
 import AnimatedStartingPage from './pages/AnimatedStartingPage';
+import AuthPage from './pages/AuthPage';
 
 
 const SITE_NAME = "CodeMelon";
@@ -33,6 +34,7 @@ function App() {
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/cookies" element={<CookiePolicy />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/auth" element={<AuthPage />} />
           <Route path="*" element={<Development theme={theme} setTheme={handleSetTheme} />} />
         </Routes>
       </Router>
