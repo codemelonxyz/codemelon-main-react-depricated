@@ -9,6 +9,7 @@ import CookiePolicy from './pages/CookiePolicy';
 import ContactUs from './pages/ContactUs';
 import AnimatedStartingPage from './pages/AnimatedStartingPage';
 import WatermelonAi from './pages/WatermelonAi/WatermelonAi';
+import AuthPage from './pages/AuthPage';
 
 const SITE_NAME = "CodeMelon";
 
@@ -29,12 +30,19 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<AnimatedStartingPage siteName={SITE_NAME} />} />
-          <Route path="/home" element={<Home siteName={SITE_NAME} theme={theme} setTheme={handleSetTheme} />} />
+          <Route
+            path="/home"
+            element={<Home siteName={SITE_NAME} theme={theme} setTheme={handleSetTheme} />}
+          />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/cookies" element={<CookiePolicy />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/ai/watermelon" element={<WatermelonAi />} />
-          <Route path="*" element={<Development theme={theme} setTheme={handleSetTheme} />} />
+          <Route path="/auth" element={<AuthPage />} />
+          <Route
+            path="*"
+            element={<Development theme={theme} setTheme={handleSetTheme} />}
+          />
         </Routes>
       </Router>
     </ThemeProvider>

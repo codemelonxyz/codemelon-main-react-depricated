@@ -39,6 +39,7 @@ function ContactUs() {
         <FormWizard
           questions={questions}
           onSubmit={handleFormSubmit}
+          navFooter={true} // Hide the navigation footer
         />
       </main>
       <Footer />
