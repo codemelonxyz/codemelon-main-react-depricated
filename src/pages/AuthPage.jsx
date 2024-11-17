@@ -5,6 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { BackgroundBeams } from '../components/ui/background-beams';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
+import { Loader, Placeholder } from 'rsuite';
 
 function AuthPage() {
     const { theme, setTheme } = useContext(ThemeContext);
@@ -12,7 +13,7 @@ function AuthPage() {
     const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const paramValue = searchParams.get('q');
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
@@ -22,13 +23,13 @@ function AuthPage() {
   });
     
     useEffect(() => {
-        if (paramValue === 'login') {
-            setIsLogin(true);
-        } else if (paramValue === 'register') {
-            setIsLogin(false);
-        } else {
-            navigate('/auth?q=login');
-        }
+      if (paramValue === 'login') {
+          setIsLogin(true);
+      } else if (paramValue === 'register') {
+          setIsLogin(false);
+      } else {
+          navigate('/auth?q=login');
+      }
     }, [navigate, paramValue]);
 
     useEffect(() => {
@@ -44,6 +45,15 @@ function AuthPage() {
     e.preventDefault();
     console.log('Form submitted:', formData);
   };
+
+  if(isLogin === null ){
+    return (
+      <div>
+        <Placeholder.Paragraph rows={8} />
+        <Loader center content="loading" />
+      </div>
+    )
+  }
 
   return (
     <div className={`min-h-screen w-full transition-colors duration-300 ${
