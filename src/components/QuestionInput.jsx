@@ -8,7 +8,8 @@ export const QuestionInput = forwardRef(({
   value, 
   onChange,
   required,
-  error // Added error prop
+  error,
+  navFooter
 }, ref) => {
   const textareaRef = useRef(null);
   const inputRef = useRef(null);
