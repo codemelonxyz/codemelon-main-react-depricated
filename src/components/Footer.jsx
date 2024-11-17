@@ -9,7 +9,7 @@ function Footer() {
     theme === 'dark' ? 'bg-neutral-950 text-white' : 'bg-white text-black';
 
   return (
-    <footer className={`w-full py-8 ${footerClass}`}>
+    <footer className={`w-full py-8 ${footerClass} relative`}>
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-between">
           {/* About Section */}
