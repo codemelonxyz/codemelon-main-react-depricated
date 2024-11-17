@@ -8,7 +8,7 @@ function Development() {
   return (
     <div
       style={{ width: "100vw", height: "100vh", fontFamily: "'Sour Gummy', sans-serif" }}
-      className={`flex justify-center items-center text-black flex-col ${theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'}`}
+      className={`flex justify-center items-center text-black flex-col ${theme === 'dark' ? 'bg-neutral-950 text-white' : 'bg-white text-black'}`}
     >
       <img src={"/assets/nobackgroundlogo.png"} alt="Logo" className="w-96 animate-rotate" />
       <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">CodeMelon</p>

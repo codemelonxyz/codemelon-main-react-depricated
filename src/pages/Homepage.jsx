@@ -1,19 +1,20 @@
 import NavBar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { BackgroundBeams } from "../components/ui/background-beams";
+import { ThemeContext } from "../ThemeContext";
+import React, {useContext} from 'react';
 
 function Homepage() {
+    const { theme, setTheme } = useContext(ThemeContext);
     return (
         <div className="flex flex-col min-h-screen">
+             {theme === "dark" ? <BackgroundBeams /> : null }
             <NavBar />
             <div className="flex-grow">
                 Hi
             </div>
-            <Footer>
-                <div className="mt-4">
-                    <a href="/privacy" className="mr-4 underline">Privacy Policy</a>
-                    <a href="/cookies" className="underline">Cookie Policy</a>
-                </div>
-            </Footer>
+            <Footer/>
+           
         </div>
     )
 }

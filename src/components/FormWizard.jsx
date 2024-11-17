@@ -116,7 +116,7 @@ export function FormWizard({ questions, onSubmit, navFooter }) {
   return (
     <div
       className={`min-w-full shadow-sm relative flex flex-col ${!navFooter ? 'h-[calc(100vh)]' : 'h-[calc(90vh)]'} ${
-        theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-black'
+        theme === 'dark' ? 'bg-neutral-950 text-white' : 'bg-white text-black'
       }`} // Updated classes based on theme
       onKeyDown={handleKeyDown} // Added onKeyDown handler
     >
@@ -158,7 +158,7 @@ export function FormWizard({ questions, onSubmit, navFooter }) {
               ? 'animate-slide-in-down'
               : ''
           } ${
-            theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-gray-100 text-black'
+            theme === 'dark' ? 'bg-neutral-850 text-white' : 'bg-gray-100 text-black'
           }`} 
         >
           <QuestionInput
