@@ -37,22 +37,19 @@ function Navbar() {
         buttonRef.current &&
         !buttonRef.current.contains(event.target)
       ) {
-        if (isOpen) {
-          handleMenuToggle();
-        }
+        setClosing(true);
+        setTimeout(() => {
+          setIsOpen(false);
+          setClosing(false);
+        }, 700);
       }
     };
 
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isOpen]);
+  }, []);
 
   return (
     <nav
