@@ -22,9 +22,6 @@ function PrivacyPolicy() {
         <ul className="list-disc list-inside">
           <li>Email Address</li>
           <li>Device Location</li>
-          <li>Device Information</li>
-          <li>System Information</li>
-          <li>Usage Data</li>
         </ul>
       </section>
       

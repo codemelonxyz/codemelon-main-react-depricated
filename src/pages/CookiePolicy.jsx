@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../ThemeContext';
-import { BackgroundBeams } from '../components/ui/background-beams';
 
 function CookiePolicy() {
   const { theme } = useContext(ThemeContext);
@@ -21,9 +20,6 @@ function CookiePolicy() {
         <p>We use cookies for various purposes, including:</p>
         <ul className="list-disc list-inside">
           <li>Understanding how users navigate our platform</li>
-          <li>Enhancing user experience</li>
-          <li>Personalizing content and advertisements</li>
-          <li>Analyzing platform performance</li>
         </ul>
       </section>
       
