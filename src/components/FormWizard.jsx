@@ -6,7 +6,7 @@ import { ProgressIndicator } from './ProgressIndicator';
 import { ProgressBar } from './ProgressBar'; // Import ProgressBar
 import { Send } from 'lucide-react';
 
-export function FormWizard({ questions, onSubmit }) {
+export function FormWizard({ questions, onSubmit, navFooter }) {
   const { theme } = useContext(ThemeContext); // Access theme
   const [currentStep, setCurrentStep] = useState(0);
   const [previousStep, setPreviousStep] = useState(null); // New state variable
@@ -115,7 +115,7 @@ export function FormWizard({ questions, onSubmit }) {
 
   return (
     <div
-      className={`min-w-full shadow-sm relative flex flex-col h-[calc(90vh)] ${
+      className={`min-w-full shadow-sm relative flex flex-col ${!navFooter ? 'h-[calc(100vh)]' : 'h-[calc(90vh)]'} ${
         theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-black'
       }`} // Updated classes based on theme
       onKeyDown={handleKeyDown} // Added onKeyDown handler
@@ -135,7 +135,7 @@ export function FormWizard({ questions, onSubmit }) {
             className={`absolute w-full ${
               direction === 'slide-up' ? 'animate-slide-out-up' : 'animate-slide-out-down'
             }`}
-            onAnimationEnd={() => setPreviousStep(null)} // Cleanup after animation
+            onAnimationEnd={() => setPreviousStep(null)} 
           >
             <QuestionInput
               theme={theme} // Pass theme to QuestionInput
@@ -144,13 +144,14 @@ export function FormWizard({ questions, onSubmit }) {
               placeholder={questions[previousStep].placeholder}
               value={answers[questions[previousStep].id] || ''}
               onChange={handleInputChange}
+              navFooter={navFooter} 
             />
           </div>
         )}
         
         {/* Incoming Question */}
         <div
-          className={`transition-opacity duration-500 ${
+          className={`transition-opacity duration-500 ${navFooter ? "" : "mt-[200px]"} ${
             direction === 'slide-up'
               ? 'animate-slide-in-up'
               : direction === 'slide-down'
@@ -158,18 +159,18 @@ export function FormWizard({ questions, onSubmit }) {
               : ''
           } ${
             theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-gray-100 text-black'
-          }`} // Conditional styling based on theme
+          }`} 
         >
           <QuestionInput
-            theme={theme} // Pass theme to QuestionInput
-            ref={questionRef} // Pass ref to QuestionInput
+            theme={theme} 
+            ref={questionRef}
             question={questions[currentStep].question}
             type={questions[currentStep].type}
             placeholder={questions[currentStep].placeholder}
             value={answers[questions[currentStep].id] || ''}
             onChange={handleInputChange}
-            required={questions[currentStep].required} // Passed required prop
-            error={errors[currentStep]} // Passed error prop
+            required={questions[currentStep].required}
+            error={errors[currentStep]}
           />
         </div>
       </div>
