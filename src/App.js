@@ -38,8 +38,8 @@ function App() {
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/cookies" element={<CookiePolicy />} />
           <Route path="/contact" element={<ContactUs />} />
-          <Route path="/ai/admin/watermelon" element={<WatermelonAi />} />
-          <Route path="/ai/watermelon" element={<Waitlist />} />
+          <Route path="/ai/watermelon" element={<WatermelonAi />} />
+          <Route path="/waitlist" element={<Waitlist />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route
             path="*"
