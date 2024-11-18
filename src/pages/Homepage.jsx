@@ -6,6 +6,7 @@ import { ThemeContext } from "../ThemeContext";
 import { Lamp } from "../components/homepage/Lamp.jsx"; 
 import Search from "../components/homepage/Seach.jsx";
 import Grid from "../components/homepage/Grid.jsx";
+import { GridCards } from '../components/homepage/GridCards.jsx';
 function Homepage() {
     const { theme } = useContext(ThemeContext);
     return (
@@ -14,7 +15,10 @@ function Homepage() {
             <NavBar />
             <div className={`flex-grow ${theme === "dark" ? "bg-neutral-950" : "bg-white"}`}>
                 <Lamp /> 
-                {/* <Grid /> */}
+                <div className={`flex justify-center items-center font-bold ${theme === "light" ? "text-neutral-950" : "text-white"}`}>
+                    <p className='mb-[10rem] text-2xl lg:text-5xl'>Our Apps and Services</p>
+                </div>
+                < GridCards />
                 <Search />
             </div>
             <Footer/>

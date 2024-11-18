@@ -26,9 +26,9 @@ export default function PlaceholdersAndVanishInputDemo() {
       }, 1000)
   };
   return (
-    (<div className="h-[40rem] flex flex-col justify-center  items-center px-4 mt-[-10rem]">
+    (<div className="h-[40rem] flex flex-col justify-center  items-center px-4 ">
       <h2
-        className={`mb-10 mt-[-10rem] z-10 sm:mb-20 text-xl text-center sm:text-5xl ${theme === "light" ? "bg-white text-black" : "bg-neutral-950 text-white"}`}>
+        className={`mb-10 z-10 sm:mb-20 text-xl text-center sm:text-5xl ${theme === "light" ? "bg-white text-black" : "bg-neutral-950 text-white"}`}>
         Create Any Component with Watermelon
       </h2>
       <PlaceholdersAndVanishInput placeholders={placeholders} onChange={handleChange} onSubmit={onSubmit} theme={theme}/>
