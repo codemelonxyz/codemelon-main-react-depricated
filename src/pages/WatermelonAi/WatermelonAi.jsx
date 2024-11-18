@@ -4,22 +4,27 @@ import { ThemeContext } from "../../ThemeContext";
 import { Sidebar, SidebarBody, SidebarLink } from "../../components/ui/sidebar";
 import {
   IconArrowLeft,
-  IconBrandTabler,
+  IconPlus,
   IconSettings,
   IconUserBolt,
 } from "@tabler/icons-react";
 import { cn } from "../../lib/utils";
 import { GlassmorphicCard } from "../../components/ui/glasscard";
-import { Sparkles, Brain } from "lucide-react";
+import { Sparkles, Brain, Send } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
+import { FormWizard } from '../../components/FormWizard';
+import { MultiStepLoader as Loader } from "../../components/ui/multi-step-loader";
+import { IconSquareRoundedX } from "@tabler/icons-react";
+import Dashboard from "../../components/Dashboard"; // Add this import
 
 function WatermelonAi() {
   const { theme } = useContext(ThemeContext);
   const links = [
     {
-      label: "Dashboard",
+      label: "New Chat",
       href: "#",
       icon: (
-        <IconBrandTabler
+        <IconPlus
           className={`${
             theme === "dark" ? "text-white" : "text-black"
           } dark:text-neutral-200 h-5 w-5 flex-shrink-0`}
@@ -62,8 +67,12 @@ function WatermelonAi() {
   ];
   const [open, setOpen] = useState(false);
 
-  const Logo = () => <div>Logo</div>; // Placeholder for Logo component
-  const LogoIcon = () => <div>LogoIcon</div>; // Placeholder for LogoIcon component
+  const Logo = () => <div>Watermelon AI</div>; // Placeholder for Logo component
+  const LogoIcon = () => <img
+  src={"/assets/nobackgroundlogo.png"}
+  alt="Logo"
+  className="animate-rotate"
+/>; // Placeholder for LogoIcon component
 
   return (
     <div
@@ -106,47 +115,5 @@ function WatermelonAi() {
     </div>
   );
 }
-
-const Dashboard = () => {
-  return (
-    <div className="flex flex-1">
-      <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-neutral-950 dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full">
-        <div className="flex items-center justify-center mb-12">
-          <div className="flex items-center gap-3">
-            <Brain className="w-12 h-12 text-red-400" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-red-400 to-green-400 bg-clip-text text-transparent">
-              Watermelon AI
-            </h1>
-          </div>
-        </div>
-        <div className="h-[100vh] flex items-center justify-center">
-          <GlassmorphicCard backgroundColor="bg-gradient-to-br from-[#ff7e5f] via-[#feb47b] to-[#ff7e5f]">
-            <div className="h-full w-full p-8 flex flex-col items-center justify-center text-white">
-              <Sparkles className="w-12 h-12 mb-4" />
-              <h2 className="text-2xl font-bold mb-4">
-                Want to prompt my self
-              </h2>
-              <p className="text-center text-white/80">
-                You have to prompt yourself to create a components!!!
-              </p>
-            </div>
-          </GlassmorphicCard>
-          <GlassmorphicCard backgroundColor="bg-gradient-to-br from-[#43cea2] via-[#185a9d] to-[#43cea2]">
-            <div className="h-full w-full p-8 flex flex-col items-center justify-center text-white">
-              <Sparkles className="w-12 h-12 mb-4" />
-              <h2 className="text-2xl font-bold mb-4">
-                Create a component more customized
-              </h2>
-              <p className="text-center text-white/80">
-                You can create a component more customized by providing some
-                simple answers!
-              </p>
-            </div>
-          </GlassmorphicCard>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 export default WatermelonAi;
