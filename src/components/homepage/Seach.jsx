@@ -22,7 +22,7 @@ export default function PlaceholdersAndVanishInputDemo() {
   const onSubmit = (e) => {
       e.preventDefault();
       setTimeout(() => {
-        navigate('/ai/watermelon');    
+        navigate('/waitlist');    
       }, 1000)
   };
   return (
