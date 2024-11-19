@@ -8,8 +8,9 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookiePolicy from './pages/CookiePolicy';
 import ContactUs from './pages/ContactUs';
 import AnimatedStartingPage from './pages/AnimatedStartingPage';
-import WatermelonAi from './pages/WatermelonAi/WatermelonAi';
+import WatermelonAi from './pages/WatermelonAi/WatermelonAi.jsx';
 import AuthPage from './pages/AuthPage';
+import Waitlist from './pages/Waitlist';
 
 const SITE_NAME = "CodeMelon";
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/cookies" element={<CookiePolicy />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/ai/watermelon" element={<WatermelonAi />} />
+          <Route path="/waitlist" element={<Waitlist />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route
             path="*"

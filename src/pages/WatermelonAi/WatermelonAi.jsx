@@ -1,28 +1,119 @@
-"use client";
-import React, { useContext } from 'react';
+import React, { useContext, useState } from "react";
 import { BackgroundBeams } from "../../components/ui/background-beams";
-import { Cover } from "../../components/ui/cover";
-import { ThemeContext } from '../../ThemeContext';
+import { ThemeContext } from "../../ThemeContext";
+import { Sidebar, SidebarBody, SidebarLink } from "../../components/ui/sidebar";
+import {
+  IconArrowLeft,
+  IconPlus,
+  IconSettings,
+  IconUserBolt,
+} from "@tabler/icons-react";
+import { cn } from "../../lib/utils";
+import { GlassmorphicCard } from "../../components/ui/glasscard";
+import { Sparkles, Brain, Send } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
+import { FormWizard } from '../../components/FormWizard';
+import { MultiStepLoader as Loader } from "../../components/ui/multi-step-loader";
+import { IconSquareRoundedX } from "@tabler/icons-react";
+import Dashboard from "../../components/Dashboard"; // Add this import
 
-export function Watermelon() {
+function WatermelonAi() {
   const { theme } = useContext(ThemeContext);
+  const links = [
+    {
+      label: "New Chat",
+      href: "#",
+      icon: (
+        <IconPlus
+          className={`${
+            theme === "dark" ? "text-white" : "text-black"
+          } dark:text-neutral-200 h-5 w-5 flex-shrink-0`}
+        />
+      ),
+    },
+    {
+      label: "Profile",
+      href: "#",
+      icon: (
+        <IconUserBolt
+          className={`${
+            theme === "dark" ? "text-white" : "text-black"
+          } dark:text-neutral-200 h-5 w-5 flex-shrink-0`}
+        />
+      ),
+    },
+    {
+      label: "Settings",
+      href: "#",
+      icon: (
+        <IconSettings
+          className={`${
+            theme === "dark" ? "text-white" : "text-black"
+          } dark:text-neutral-200 h-5 w-5 flex-shrink-0`}
+        />
+      ),
+    },
+    {
+      label: "Logout",
+      href: "#",
+      icon: (
+        <IconArrowLeft
+          className={`${
+            theme === "dark" ? "text-white" : "text-black"
+          } dark:text-neutral-200 h-5 w-5 flex-shrink-0`}
+        />
+      ),
+    },
+  ];
+  const [open, setOpen] = useState(false);
+
+  const Logo = () => <div>Watermelon AI</div>; // Placeholder for Logo component
+  const LogoIcon = () => <img
+  src={"/assets/nobackgroundlogo.png"}
+  alt="Logo"
+  className="animate-rotate"
+/>; // Placeholder for LogoIcon component
+
   return (
-    <div className="h-[calc(100vh)] w-full bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
-      <div className="max-w-2xl mx-auto p-4">
-        <h1 className="relative z-10 text-lg md:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold">
-          Join the waitlist
-        </h1>
-        <p className="text-neutral-500 max-w-lg mx-auto my-2 text-sm text-center relative z-10">
-          Be the part of the journey to the future of AI. 
-          Join the waitlist to get early access to Watermelon AI.
-        </p>
-        <div className="flex justify-center mt-4">
-          <button><Cover>Join the waitlist</Cover></button>
-        </div>
-      </div>
-      {theme === 'dark' && <BackgroundBeams />}
+    <div
+      className={cn(
+        `flex flex-col md:flex-row ${
+          theme === "dark" ? "bg-neutral-950" : "bg-white"
+        } flex-1 w-screen mx-auto dark:border-neutral-700 overflow-hidden h-screen`
+      )}
+    >
+      <Sidebar open={open} setOpen={setOpen}>
+        <SidebarBody
+          className={`justify-between gap-10 ${
+            theme === "dark" ? "bg-neutral-950" : "bg-white"
+          }`}
+        >
+          <div
+            className={`flex flex-col flex-1 overflow-y-auto overflow-x-hidden ${
+              theme === "dark" ? "bg-neutral-950 text-white" : "text-black"
+            }`}
+          >
+            {open ? <Logo /> : <LogoIcon />}
+            <div className={`mt-8 flex flex-col gap-2`}>
+              {links.map((link, idx) => (
+                <SidebarLink
+                  key={idx}
+                  link={link}
+                  className={`${
+                    theme === "dark"
+                      ? "bg-neutral-950 text-white"
+                      : "text-black"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </SidebarBody>
+      </Sidebar>
+      <Dashboard />
+      {theme === "dark" && <BackgroundBeams />}
     </div>
   );
 }
 
-export default Watermelon;
+export default WatermelonAi;
