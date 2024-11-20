@@ -28,7 +28,7 @@ export const Cover = ({
       );
       setBeamPositions(positions);
     }
-  }, [ref.current]);
+  }, []); // Remove 'ref.current' from dependencies
 
   return (
     (<div
