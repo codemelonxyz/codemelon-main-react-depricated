@@ -13,15 +13,12 @@ const words = [
 
 export function Lamp() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsAnimatingOut(true);
       setTimeout(() => {
         setCurrentIndex((prev) => (prev + 1) % words.length);
-        setIsAnimatingOut(false);
       }, 200);
     }, 2000);
 

@@ -5,7 +5,7 @@ import { BackgroundBeams } from "../components/ui/background-beams";
 import { ThemeContext } from "../ThemeContext";
 import { Lamp } from "../components/homepage/Lamp.jsx"; 
 import Search from "../components/homepage/Seach.jsx";
-import Grid from "../components/homepage/Grid.jsx";
+// import Grid from "../components/homepage/Grid.jsx";
 import { GridCards } from '../components/homepage/GridCards.jsx';
 function Homepage() {
     const { theme } = useContext(ThemeContext);
