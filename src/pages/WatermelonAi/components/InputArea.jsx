@@ -3,6 +3,12 @@ import { FiSend } from "react-icons/fi";
 
 const InputArea = ({ inputValue, setInputValue, handleSend, handleKeyPress }) => (
   <div className="p-4">
+    <div className="text-center mt-2">
+      <p className="text-gray-500 text-xs sm:text-sm">
+        Watermelon can make mistakes. Consider checking important
+        information.
+      </p>
+    </div>
     <div className="flex">
       <div className="flex-1 bg-gray-800 rounded-lg flex items-center p-2">
         <img src="/nobackgroundlogo.png" alt="Logo" className="w-6 h-6 mr-2" />
@@ -21,12 +27,6 @@ const InputArea = ({ inputValue, setInputValue, handleSend, handleKeyPress }) =>
           <FiSend className="text-white" />
         </button>
       </div>
-    </div>
-    <div className="text-center mt-2">
-      <p className="text-gray-500 text-xs sm:text-sm">
-        Watermelon can make mistakes. Consider checking important
-        information.
-      </p>
     </div>
   </div>
 );

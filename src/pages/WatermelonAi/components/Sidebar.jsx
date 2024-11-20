@@ -76,7 +76,7 @@ const Sidebar = () => {
           ))}
         </div>
 
-        <button className="mt-4 mb-8 bg-[#7680af] text-white rounded-lg p-2 flex items-center justify-center hover:bg-[#525c8c]">
+        <button className="mt-4 m-1 bg-[#7680af] text-white rounded-lg p-2 flex items-center justify-center hover:bg-[#525c8c]">
           <FiPlus className="mr-2" />
           New chat
         </button>

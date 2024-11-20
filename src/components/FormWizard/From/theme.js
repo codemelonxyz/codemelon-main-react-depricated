@@ -6,7 +6,7 @@ export const themes = {
     subtext: 'text-gray-500',
     accent: 'text-cyan-600',
     button: {
-      primary: 'bg-cyan-600 text-white hover:bg-cyan-700',
+      primary: 'bg-cyan-600 text-white hover:bg-[#525c8c]',
       secondary: 'text-gray-600 hover:bg-gray-100',
       disabled: 'text-gray-400',
     },
@@ -19,7 +19,7 @@ export const themes = {
       fill: 'bg-cyan-600',
     },
     input: {
-      base: 'border border-gray-200 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none',
+      base: 'border border-gray-200 focus:border-cyan-500 focus:ring-1 hover:bg-[#525c8c] outline-none',
       text: 'bg-gray-50',
       select: 'bg-gray-50',
     },
@@ -29,9 +29,9 @@ export const themes = {
     card: 'bg-gray-800',
     text: 'text-gray-100',
     subtext: 'text-gray-400',
-    accent: 'text-cyan-400',
+    accent: 'text-[#7680af]',
     button: {
-      primary: 'bg-cyan-500 text-white hover:bg-cyan-600',
+      primary: 'bg-[#7680af] text-white hover:bg-[#525c8c]',
       secondary: 'text-gray-300 hover:bg-gray-700',
       disabled: 'text-gray-600',
     },
@@ -41,10 +41,10 @@ export const themes = {
     },
     progress: {
       bg: 'bg-gray-700',
-      fill: 'bg-cyan-500',
+      fill: 'bg-[#7680af]',
     },
     input: {
-      base: 'border border-gray-600 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 outline-none',
+      base: 'border border-gray-600 focus:border-[#7680af] focus:ring-1 focus:ring-[#7680af] outline-none',
       text: 'bg-gray-700 text-gray-100',
       select: 'bg-gray-700 text-gray-100',
     },
