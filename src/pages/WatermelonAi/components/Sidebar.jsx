@@ -32,7 +32,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div className={clsx(
-        "fixed sm:static inset-0 bg-gray-900 w-80 h-full p-4 flex flex-col transition-transform duration-300 ease-in-out z-40",
+        "fixed sm:static inset-0 w-80 h-full p-4 flex flex-col transition-transform duration-300 ease-in-out z-40 border-r-2 border-gray-800 rounded-lg",
         "sm:translate-x-0",
         isOpen ? "translate-x-0" : "-translate-x-full"
       )}>
@@ -76,7 +76,7 @@ const Sidebar = () => {
           ))}
         </div>
 
-        <button className="mt-4 mb-8 bg-green-500 text-white rounded-lg p-2 flex items-center justify-center hover:bg-green-600">
+        <button className="mt-4 mb-8 bg-[#7680af] text-white rounded-lg p-2 flex items-center justify-center hover:bg-[#525c8c]">
           <FiPlus className="mr-2" />
           New chat
         </button>
