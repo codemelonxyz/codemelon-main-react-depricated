@@ -83,8 +83,8 @@ function Navbar() {
         <button className="animate-slide-in-right" style={{ animationDelay: '0.2s' }}>
           About Us
         </button>
-        <button className="animate-slide-in-right" style={{ animationDelay: '0.3s' }}>
-          Something
+        <button className="animate-slide-in-right cursor-pointer" style={{ animationDelay: '0.3s' }} onClick={() => { navigate("/waitlist") }}>
+          Watermelon
         </button>
         {/* Privacy policy and cookie policy button */}
         {/*  */}
@@ -115,7 +115,7 @@ function Navbar() {
                   : 'bg-slate-300 hover:bg-gray-600 hover:text-white'
               }`}
               style={{ animationDelay: '0.5s' }}
-              onClick={() => navigate('/login')}
+              onClick={() => navigate('/auth?q=login')}
             >
               Log In
             </button>
@@ -126,7 +126,7 @@ function Navbar() {
                   : 'bg-blue-600 hover:bg-blue-500 text-white'
               }`}
               style={{ animationDelay: '0.6s' }}
-              onClick={() => navigate('/auth/signup')}
+              onClick={() => navigate('/auth?q=signup')}
             >
               Sign Up
             </button>
@@ -169,34 +169,49 @@ function Navbar() {
           </button>
           <button
             className="block w-full text-left px-4 py-2 hover:bg-opacity-75"
-            onClick={() => navigate('/something')}
+            onClick={() => navigate('/waitlist')}
           >
-            Something
+            Watermelon
           </button>
-          {/* Login Button */}
-          <button
-            className={`animate-slide-in-right ml-4 px-4 py-2 rounded ${
-              theme === 'dark'
-                ? 'bg-gray-700 hover:bg-gray-600'
-                : 'bg-slate-300 hover:bg-gray-600 hover:text-white' // Reverted to original colors
-            }`}
-            style={{ animationDelay: '0.5s' }}
-            onClick={() => navigate('/login')}
-          >
-            Log In
-          </button>
-          {/* Signup Button */}
-          <button
-            className={`animate-slide-in-right ml-2 px-4 py-2 rounded ${
-              theme === 'dark'
-                ? 'bg-blue-600 hover:bg-blue-500 text-white'
-                : 'bg-blue-600 hover:bg-blue-500 text-white' // Reverted to original colors
-            }`}
-            style={{ animationDelay: '0.6s' }}
-            onClick={() => navigate('/auth/signup')}
-          >
-            Sign Up
-          </button>
+          {/* Login/Profile Button */}
+          {isAuthenticated ? (
+            <button
+              className={`animate-slide-in-right ml-4 px-4 py-2 rounded ${
+                theme === 'dark'
+                  ? 'bg-gray-700 hover:bg-gray-600'
+                  : 'bg-slate-300 hover:bg-gray-600 hover:text-white'
+              }`}
+              style={{ animationDelay: '0.5s' }}
+              onClick={() => navigate('/profile')}
+            >
+              Profile
+            </button>
+          ) : (
+            <>
+              <button
+                className={`animate-slide-in-right ml-4 px-4 py-2 rounded ${
+                  theme === 'dark'
+                    ? 'bg-gray-700 hover:bg-gray-600'
+                    : 'bg-slate-300 hover:bg-gray-600 hover:text-white'
+                }`}
+                style={{ animationDelay: '0.5s' }}
+                onClick={() => navigate('/auth?q=login')}
+              >
+                Log In
+              </button>
+              <button
+                className={`animate-slide-in-right ml-2 px-4 py-2 rounded ${
+                  theme === 'dark'
+                    ? 'bg-blue-600 hover:bg-blue-500 text-white'
+                    : 'bg-blue-600 hover:bg-blue-500 text-white'
+                }`}
+                style={{ animationDelay: '0.6s' }}
+                onClick={() => navigate('/auth?q=signup')}
+              >
+                Sign Up
+              </button>
+            </>
+          )}
           {/* Theme Toggle Button */}
           <button
             className="block w-full text-left px-4 py-2 mt-2 items-center rounded focus:outline-none"
