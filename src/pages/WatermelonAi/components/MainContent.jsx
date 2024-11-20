@@ -5,10 +5,11 @@ import { IconSquareRoundedX } from "@tabler/icons-react";
 import WelcomeContent from "./WelcomeContent.jsx";
 import InputArea from "./InputArea.jsx";
 import { FormWizard } from "../../../components/FormWizard/FormWizard.jsx";
+import ChatContainer from "./ChatContainer.jsx"; // Import ChatContainer
 
 const MainContent = () => {
   const { theme } = useContext(ThemeContext);
-  const [message, setMessages] = useState([]);
+  const [messages, setMessages] = useState([]); // Corrected 'message' to 'messages'
   const [inputValue, setInputValue] = useState("");
   const [showWelcome, setShowWelcome] = useState(true);
   const [showFormWizard, setShowFormWizard] = useState(false);
@@ -100,14 +101,16 @@ alert("Hello, " + name + "! Welcome to our website!");`,
     <div className="flex-1 flex flex-col min-w-0">
       <Loader loadingStates={loadingStates} loading={loading} duration={2000} />
       {showFormWizard ? (
-        // Render FormWizard when showFormWizard is true
         <FormWizard
           questions={questions}
           onSubmit={() => setLoading(true)}
           theme={theme}
         />
-      ) : (
+      ) : !loading && messages.length === 0 && (
         <WelcomeContent handleGenerate={handleGenerate} />
+      )}
+      {!loading && messages.length > 0 && (
+        <ChatContainer messages={messages} /> // Use ChatContainer to display messages
       )}
       {loading && (
         <button
