@@ -1,13 +1,15 @@
 import { useState, useContext } from "react";
 import { ThemeContext } from "../../../ThemeContext.js";
 import { MultiStepLoader as Loader } from "../../../components/ui/multi-step-loader.jsx";
-import { IconSquareRoundedX } from "@tabler/icons-react";
+import { IconSquareRoundedX, IconRobotFace, IconChevronLeft } from "@tabler/icons-react"; // Import back icon
 import WelcomeContent from "./WelcomeContent.jsx";
 import InputArea from "./InputArea.jsx";
 import { FormWizard } from "../../../components/FormWizard/FormWizard.jsx";
 import ChatContainer from "./ChatContainer.jsx"; // Import ChatContainer
+import { useNavigate } from "react-router-dom";
 
 const MainContent = () => {
+  const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
   const [messages, setMessages] = useState([]); // Corrected 'message' to 'messages'
   const [inputValue, setInputValue] = useState("");
@@ -97,11 +99,23 @@ alert("Hello, " + name + "! Welcome to our website!");`,
     setShowFormWizard(true);
   };
 
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex items-center p-4">
+        <button onClick={handleBack}>
+          <IconChevronLeft className="h-6 w-6 text-white" />
+        </button>
+        <h1 className="ml-2 text-lg font-semibold text-white">Header Title</h1>
+      </div>
       <Loader loadingStates={loadingStates} loading={loading} duration={2000} />
       {showFormWizard ? (
         <FormWizard
+          logo={<IconRobotFace />}
+          title="Generate Code Snippet"
           questions={questions}
           onSubmit={() => setLoading(true)}
           theme={theme}
