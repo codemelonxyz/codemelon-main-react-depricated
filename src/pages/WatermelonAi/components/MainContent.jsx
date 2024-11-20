@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "../../../ThemeContext.js";
 import { MultiStepLoader as Loader } from "../../../components/ui/multi-step-loader.jsx";
 import { IconSquareRoundedX, IconRobotFace, IconChevronLeft } from "@tabler/icons-react"; // Import back icon
@@ -7,8 +7,11 @@ import InputArea from "./InputArea.jsx";
 import { FormWizard } from "../../../components/FormWizard/FormWizard.jsx";
 import ChatContainer from "./ChatContainer.jsx"; // Import ChatContainer
 import { useNavigate } from "react-router-dom";
+import WatermelonAPI from "../../../services/watermelon.api.js";
+import {useAuth} from '../../../contexts/AuthContext.jsx';
 
 const MainContent = () => {
+  const { token, logout } = useAuth();
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
   const [messages, setMessages] = useState([]); // Corrected 'message' to 'messages'
@@ -16,6 +19,18 @@ const MainContent = () => {
   const [showWelcome, setShowWelcome] = useState(true);
   const [showFormWizard, setShowFormWizard] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [currentId, setCurrentId] = useState('');
+
+  useEffect(() => {
+    const fetchChats = async () => {
+      const chats = await WatermelonAPI.createChat(token.token);
+      console.log("this",chats)
+      setCurrentId(chats.chat_id);
+    };
+    fetchChats();
+  }, [])
+
+  // logout();
 
   const loadingStates = [
     {
@@ -29,7 +44,7 @@ const MainContent = () => {
     },
   ];
 
-  const questions = [
+  const [questions, setQuestions] = useState([
     {
       id: 1,
       name: "componentType",
@@ -54,7 +69,20 @@ const MainContent = () => {
       placeholder: "e.g., React, Vue, Angular",
       required: true,
     },
-  ];
+  ]);
+
+  const convertQuestions = (jsonObject) => {
+    return Object.keys(jsonObject).map((key, index) => {
+      return {
+        id: index + 1,
+        name: key,
+        text: jsonObject[key],
+        type: "text", // Assuming all questions are of type "text". Adjust if needed.
+        placeholder: "", // Placeholder can be set if provided or required.
+        required: true // Assuming all questions are required. Adjust if needed.
+      };
+    });
+  };
 
   const handleSend = () => {
     if (!inputValue.trim()) return;
@@ -103,13 +131,24 @@ alert("Hello, " + name + "! Welcome to our website!");`,
     navigate(-1);
   };
 
+  const handleFormWizardSubmit = async () => {
+    setShowFormWizard(false);
+    setLoading(true);
+    const data = {}
+    const some = await WatermelonAPI.getQuestions(currentId, token.token, data);
+    setLoading(false);
+    console.log(some.data)
+    const newQuestions = convertQuestions(JSON.parse(some.data));
+    setQuestions(newQuestions); // Update questions state
+    setShowFormWizard(true); // Show FormWizard with new questions
+  }
   return (
     <div className="flex-1 flex flex-col min-w-0">
       <div className="flex items-center p-4">
         <button onClick={handleBack}>
           <IconChevronLeft className="h-6 w-6 text-white" />
         </button>
-        <h1 className="ml-2 text-lg font-semibold text-white">Header Title</h1>
+        <h1 className="ml-2 text-lg font-semibold text-white">this {currentId}</h1>
       </div>
       <Loader loadingStates={loadingStates} loading={loading} duration={2000} />
       {showFormWizard ? (
@@ -117,7 +156,7 @@ alert("Hello, " + name + "! Welcome to our website!");`,
           logo={<IconRobotFace />}
           title="Generate Code Snippet"
           questions={questions}
-          onSubmit={() => setLoading(true)}
+          onSubmit={handleFormWizardSubmit}
           theme={theme}
         />
       ) : !loading && messages.length === 0 && (
@@ -145,3 +184,4 @@ alert("Hello, " + name + "! Welcome to our website!");`,
 };
 
 export default MainContent;
+
