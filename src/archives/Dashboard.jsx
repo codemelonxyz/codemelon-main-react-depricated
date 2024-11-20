@@ -2,10 +2,10 @@
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../ThemeContext";
 import { useNavigate } from "react-router-dom";
-import { GlassmorphicCard } from "./ui/glasscard";
+import { GlassmorphicCard } from "../components/ui/glasscard";
 import { Sparkles, Brain } from "lucide-react";
-import { FormWizard } from '../archives/FormWizard';
-import { MultiStepLoader as Loader} from "./ui/multi-step-loader";
+import { FormWizard } from './FormWizard';
+import { MultiStepLoader as Loader} from "../components/ui/multi-step-loader";
 import ChatBox from "./ChatBox";
 
 function Dashboard() {

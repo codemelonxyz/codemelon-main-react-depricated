@@ -8,7 +8,7 @@ const WatermelonAi = () => {
   const { theme } = useContext(ThemeContext);
   return (
       <div className="h-[100vh] w-[100vw]">
-        <div className="bg-gray-900 h-full overflow-hidden shadow-2xl flex flex-col sm:flex-row">
+        <div className="bg-neutral-950 h-full overflow-hidden shadow-2xl flex flex-col sm:flex-row">
           <Sidebar />
           <MainContent />
         </div>

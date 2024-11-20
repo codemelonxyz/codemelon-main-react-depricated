@@ -11,7 +11,7 @@ function Development() {
       style={{ width: "100vw", height: "100vh", fontFamily: "'Sour Gummy', sans-serif" }}
       className={`flex justify-center items-center text-black flex-col ${theme === 'dark' ? 'bg-neutral-950 text-white' : 'bg-white text-black'}`}
     >
-      {/* ...existing code... */}
+      {theme === 'dark' && <BackgroundBeams />}
     </div>
   );
 }

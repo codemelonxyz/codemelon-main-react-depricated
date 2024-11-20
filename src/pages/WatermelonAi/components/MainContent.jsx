@@ -1,16 +1,30 @@
 import { useState, useContext } from "react";
-import { FiSend, FiMic, FiImage } from "react-icons/fi";
-import ChatContainer from "./ChatContainer.jsx";
-// Import FormWizard from the components folder
-import { FormWizard } from "../../../components/FormWizard/FormWizard.jsx";
 import { ThemeContext } from "../../../ThemeContext.js";
+import { MultiStepLoader as Loader } from "../../../components/ui/multi-step-loader.jsx";
+import { IconSquareRoundedX } from "@tabler/icons-react";
+import WelcomeContent from "./WelcomeContent.jsx";
+import InputArea from "./InputArea.jsx";
+import { FormWizard } from "../../../components/FormWizard/FormWizard.jsx";
 
 const MainContent = () => {
-  const {theme} = useContext(ThemeContext);
-  const [messages, setMessages] = useState([]);
+  const { theme } = useContext(ThemeContext);
+  const [message, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [showWelcome, setShowWelcome] = useState(true);
   const [showFormWizard, setShowFormWizard] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const loadingStates = [
+    {
+      text: "Buying a condo",
+    },
+    {
+      text: "Travelling in a flight",
+    },
+    {
+      text: "Meeting Tyler Durden",
+    },
+  ];
 
   const questions = [
     {
@@ -84,83 +98,31 @@ alert("Hello, " + name + "! Welcome to our website!");`,
 
   return (
     <div className="flex-1 flex flex-col min-w-0">
+      <Loader loadingStates={loadingStates} loading={loading} duration={2000} />
       {showFormWizard ? (
         // Render FormWizard when showFormWizard is true
         <FormWizard
           questions={questions}
-          onSubmit={()=>console.log("clicked")}
+          onSubmit={() => setLoading(true)}
           theme={theme}
         />
       ) : (
-        // ...existing welcome content...
-        <div className="flex-1 flex items-center justify-center p-4">
-          <div className="max-w-2xl w-full text-center">
-            <div className="flex justify-center mb-4">
-              <img src="/logo.png" alt="Logo" className="w-12 h-12" />
-            </div>
-            <h1 className="text-2xl sm:text-4xl font-bold text-white mb-4">
-              How can i help you today?
-            </h1>
-            <p className="text-gray-400 mb-8 text-sm sm:text-base px-4">
-              This code will display a prompt asking the user for their name,
-              and then it will display a greeting message with the name entered
-              by the user.
-            </p>
-
-            <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
-              <div className="flex justify-center mb-4">
-                <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                  <FiSend className="text-white text-2xl" />
-                </div>
-              </div>
-              <h3 className="text-white text-xl font-semibold mb-2">
-                Generate a Better Component
-              </h3>
-              <p className="text-gray-400 mb-4">
-                Get more customized data and improve your component with just
-                one click.
-              </p>
-              <div className="flex justify-center">
-                <button
-                  className="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 flex items-center justify-center"
-                  onClick={handleGenerate}
-                >
-                  <span className="mr-2">Generate</span>
-                  <FiSend />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <WelcomeContent handleGenerate={handleGenerate} />
       )}
-
-      <div className="p-4">
-        <div className="flex">
-          <div className="flex-1 bg-gray-800 rounded-lg flex items-center p-2">
-            <img src="/logo.png" alt="Logo" className="w-6 h-6 mr-2" />
-            <input
-              type="text"
-              className="flex-1 bg-transparent border-none focus:outline-none text-white text-sm sm:text-base min-w-0"
-              placeholder="Type your message..."
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={handleKeyPress}
-            />
-            <button
-              className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 hover:bg-green-600"
-              onClick={handleSend}
-            >
-              <FiSend className="text-white" />
-            </button>
-          </div>
-        </div>
-        <div className="text-center mt-2">
-          <p className="text-gray-500 text-xs sm:text-sm">
-            Watermelon can make mistakes. Consider checking important
-            information.
-          </p>
-        </div>
-      </div>
+      {loading && (
+        <button
+          className="fixed top-4 right-4 text-black dark:text-white z-[120]"
+          onClick={() => setLoading(false)}
+        >
+          <IconSquareRoundedX className="h-10 w-10" />
+        </button>
+      )}
+      <InputArea
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        handleSend={handleSend}
+        handleKeyPress={handleKeyPress}
+      />
     </div>
   );
 };
