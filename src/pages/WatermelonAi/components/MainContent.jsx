@@ -1,11 +1,43 @@
-import { useState } from 'react';
-import { FiSend, FiMic, FiImage } from 'react-icons/fi';
-import ChatContainer from './ChatContainer.jsx'
+import { useState, useContext } from "react";
+import { FiSend, FiMic, FiImage } from "react-icons/fi";
+import ChatContainer from "./ChatContainer.jsx";
+// Import FormWizard from the components folder
+import { FormWizard } from "../../../components/FormWizard/FormWizard.jsx";
+import { ThemeContext } from "../../../ThemeContext.js";
 
 const MainContent = () => {
+  const {theme} = useContext(ThemeContext);
   const [messages, setMessages] = useState([]);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const [showWelcome, setShowWelcome] = useState(true);
+  const [showFormWizard, setShowFormWizard] = useState(false);
+
+  const questions = [
+    {
+      id: 1,
+      name: "componentType",
+      text: "What is the component type?",
+      type: "text",
+      placeholder: "e.g., Button, Card, Navbar",
+      required: true,
+    },
+    {
+      id: 2,
+      name: "programmingLanguage",
+      text: "Which programming language are you using?",
+      type: "text",
+      placeholder: "e.g., JavaScript, TypeScript",
+      required: true,
+    },
+    {
+      id: 3,
+      name: "framework",
+      text: "Which framework are you using?",
+      type: "text",
+      placeholder: "e.g., React, Vue, Angular",
+      required: true,
+    },
+  ];
 
   const handleSend = () => {
     if (!inputValue.trim()) return;
@@ -16,90 +48,90 @@ const MainContent = () => {
       content: inputValue,
       isUser: true,
     };
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
 
     // Simulate ChatGPT response
     const botResponse = {
       id: Date.now() + 1,
-      content: "Sure, here's a simple JavaScript code snippet that prompts the user for their name and then greets them:",
+      content:
+        "Sure, here's a simple JavaScript code snippet that prompts the user for their name and then greets them:",
       isUser: false,
       codeSnippet: `// Prompt the user for their name
 var name = prompt("What's your name?");
 
 // Greet the user
-alert("Hello, " + name + "! Welcome to our website!");`
+alert("Hello, " + name + "! Welcome to our website!");`,
     };
 
     setTimeout(() => {
-      setMessages(prev => [...prev, botResponse]);
+      setMessages((prev) => [...prev, botResponse]);
     }, 1000);
 
-    setInputValue('');
+    setInputValue("");
     setShowWelcome(false);
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSend();
     }
   };
 
+  const handleGenerate = () => {
+    setShowFormWizard(true);
+  };
+
   return (
     <div className="flex-1 flex flex-col min-w-0">
-      {showWelcome ? (
+      {showFormWizard ? (
+        // Render FormWizard when showFormWizard is true
+        <FormWizard
+          questions={questions}
+          onSubmit={()=>console.log("clicked")}
+          theme={theme}
+        />
+      ) : (
+        // ...existing welcome content...
         <div className="flex-1 flex items-center justify-center p-4">
           <div className="max-w-2xl w-full text-center">
             <div className="flex justify-center mb-4">
               <img src="/logo.png" alt="Logo" className="w-12 h-12" />
             </div>
-            <h1 className="text-2xl sm:text-4xl font-bold text-white mb-4">How can i help you today?</h1>
+            <h1 className="text-2xl sm:text-4xl font-bold text-white mb-4">
+              How can i help you today?
+            </h1>
             <p className="text-gray-400 mb-8 text-sm sm:text-base px-4">
-              This code will display a prompt asking the user for their name, and then it will display a greeting message with the name entered by the user.
+              This code will display a prompt asking the user for their name,
+              and then it will display a greeting message with the name entered
+              by the user.
             </p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 px-4">
-              <div className="bg-gray-800 p-4 rounded-lg">
-                <div className="flex justify-center mb-2">
-                  <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                    <FiSend className="text-white" />
-                  </div>
-                </div>
-                <h3 className="text-white font-medium mb-1 text-sm sm:text-base">Saved Prompt Templates</h3>
-                <p className="text-gray-400 text-xs sm:text-sm">Users save and reuse prompt templates for faster responses.</p>
-              </div>
-              <div className="bg-gray-800 p-4 rounded-lg">
-                <div className="flex justify-center mb-2">
-                  <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                    <FiImage className="text-white" />
-                  </div>
-                </div>
-                <h3 className="text-white font-medium mb-1 text-sm sm:text-base">Media Type Selection</h3>
-                <p className="text-gray-400 text-xs sm:text-sm">Users select media type for tailored interactions.</p>
-              </div>
-              <div className="bg-gray-800 p-4 rounded-lg">
-                <div className="flex justify-center mb-2">
-                  <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                    <FiMic className="text-white" />
-                  </div>
-                </div>
-                <h3 className="text-white font-medium mb-1 text-sm sm:text-base">Multilingual Support</h3>
-                <p className="text-gray-400 text-xs sm:text-sm">Choose language for better interaction.</p>
-              </div>
-            </div>
 
-            <div className="flex justify-center space-x-2 sm:space-x-4 mb-8 overflow-x-auto px-4 text-sm sm:text-base">
-              <button className="text-green-500 hover:text-white whitespace-nowrap">All</button>
-              <button className="text-gray-400 hover:text-white whitespace-nowrap">Text</button>
-              <button className="text-gray-400 hover:text-white whitespace-nowrap">Image</button>
-              <button className="text-gray-400 hover:text-white whitespace-nowrap">Video</button>
-              <button className="text-gray-400 hover:text-white whitespace-nowrap">Music</button>
-              <button className="text-gray-400 hover:text-white whitespace-nowrap">Analytics</button>
+            <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+              <div className="flex justify-center mb-4">
+                <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                  <FiSend className="text-white text-2xl" />
+                </div>
+              </div>
+              <h3 className="text-white text-xl font-semibold mb-2">
+                Generate a Better Component
+              </h3>
+              <p className="text-gray-400 mb-4">
+                Get more customized data and improve your component with just
+                one click.
+              </p>
+              <div className="flex justify-center">
+                <button
+                  className="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 flex items-center justify-center"
+                  onClick={handleGenerate}
+                >
+                  <span className="mr-2">Generate</span>
+                  <FiSend />
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      ) : (
-        <ChatContainer messages={messages} />
       )}
 
       <div className="p-4">
@@ -114,7 +146,7 @@ alert("Hello, " + name + "! Welcome to our website!");`
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}
             />
-            <button 
+            <button
               className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 hover:bg-green-600"
               onClick={handleSend}
             >
@@ -123,7 +155,10 @@ alert("Hello, " + name + "! Welcome to our website!");`
           </div>
         </div>
         <div className="text-center mt-2">
-          <p className="text-gray-500 text-xs sm:text-sm">Watermelon can make mistakes. Consider checking important information.</p>
+          <p className="text-gray-500 text-xs sm:text-sm">
+            Watermelon can make mistakes. Consider checking important
+            information.
+          </p>
         </div>
       </div>
     </div>
