@@ -1,11 +1,12 @@
 "use client";
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { BackgroundBeams } from "../components/ui/background-beams";
 import { Cover } from "../components/ui/cover";
 import { ThemeContext } from '../ThemeContext';
 
 export function Waitlist() {
   const { theme } = useContext(ThemeContext);
+  const [joined, setJoined] = useState(false);
   return (
     <div className="h-[calc(100vh)] w-full bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
       <div className="max-w-2xl mx-auto p-4">
@@ -17,7 +18,17 @@ export function Waitlist() {
           Join the waitlist to get early access to Watermelon AI.
         </p>
         <div className="flex justify-center mt-4">
-          <button><Cover>Join the waitlist</Cover></button>
+          {joined ? (
+            <p className='text-white'>Thank you for joining the waitlist</p>
+          ) : (
+            <button
+              onClick={() => {
+                setJoined(true);
+              }}
+            >
+              <Cover>Join the waitlist</Cover>
+            </button>
+          )}
         </div>
       </div>
       {theme === 'dark' && <BackgroundBeams />}

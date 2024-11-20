@@ -9,6 +9,12 @@ import {
   IconUserBolt,
 } from "@tabler/icons-react";
 import { cn } from "../../lib/utils";
+import { GlassmorphicCard } from "../../components/ui/glasscard";
+import { Sparkles, Brain, Send } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
+import { FormWizard } from '../../components/FormWizard';
+import { MultiStepLoader as Loader } from "../../components/ui/multi-step-loader";
+import { IconSquareRoundedX } from "@tabler/icons-react";
 import Dashboard from "../../components/Dashboard"; // Add this import
 
 function WatermelonAi() {
