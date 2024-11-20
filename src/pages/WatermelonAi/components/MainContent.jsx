@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FiSend, FiMic, FiImage } from 'react-icons/fi';
-import ChatContainer from './ChatContainer.jsx';
+import ChatContainer from './ChatContainer.jsx'
 
 const MainContent = () => {
   const [messages, setMessages] = useState([]);
