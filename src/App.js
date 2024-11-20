@@ -8,7 +8,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookiePolicy from './pages/CookiePolicy';
 import ContactUs from './pages/ContactUs';
 import AnimatedStartingPage from './pages/AnimatedStartingPage';
-import WatermelonAi from './pages/WatermelonAi/WatermelonAi.jsx';
+import WatermelonAi from './pages/WatermelonAi/NewWatermelonAi';
 import AuthPage from './pages/AuthPage';
 import Waitlist from './pages/Waitlist';
 
