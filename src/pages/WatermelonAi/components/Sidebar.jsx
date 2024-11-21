@@ -4,36 +4,9 @@ import clsx from 'clsx';
 import WatermelonAPI from '../../../services/watermelon.api';
 import { useAuth } from '../../../contexts/AuthContext'; 
 
-// const chats = [
-//   { title: 'Plan a 3-day trip', description: 'A 3-day trip to see the northern lights in Norway...' },
-//   { title: 'Ideas for a customer loyalty program', description: 'Here are seven ideas for a customer loyalty...' },
-//   { title: 'Help me pick', description: 'Here are some gift ideas for your fishing-loving...' },
-// ];
-
 const Sidebar = () => {
-  const { token } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [chats, setChats] = useState([{ title: 'No chats till now', description: '' }]);
-  // getchats
-  useEffect(() => {
-  WatermelonAPI.getChats(token.token).then((chats) => setChats(chats.chats))
-  }, []);
-
-  // useEffect(() => {
-  //   WatermelonAPI.generateKey(token.token).then();
-  // }, []);
-
-  const openChat = (chatId) => {
-    // WatermelonAPI.getChat(chatId, token).then((chat) => console.log("chat", chat));
-  }
-
-  const handleNewChat = () => {
-    // WatermelonAPI.createChat(token.token).then((chat) => console.log("chat", chat));
-  }
-  
-
-
-
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   return (

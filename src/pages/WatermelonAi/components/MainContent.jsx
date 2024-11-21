@@ -14,7 +14,7 @@ const MainContent = () => {
   const { token, logout } = useAuth();
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
-  const [messages, setMessages] = useState([]); // Corrected 'message' to 'messages'
+  const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [showWelcome, setShowWelcome] = useState(true);
   const [showFormWizard, setShowFormWizard] = useState(false);
@@ -29,8 +29,6 @@ const MainContent = () => {
     };
     fetchChats();
   }, [])
-
-  // logout();
 
   const loadingStates = [
     {
@@ -77,25 +75,21 @@ const MainContent = () => {
         id: index + 1,
         name: key,
         text: jsonObject[key],
-        type: "text", // Assuming all questions are of type "text". Adjust if needed.
-        placeholder: "", // Placeholder can be set if provided or required.
-        required: true // Assuming all questions are required. Adjust if needed.
+        type: "text",
+        placeholder: "",
+        required: true
       };
     });
   };
 
   const handleSend = () => {
     if (!inputValue.trim()) return;
-
-    // Add user message
     const userMessage = {
       id: Date.now(),
       content: inputValue,
       isUser: true,
     };
     setMessages((prev) => [...prev, userMessage]);
-
-    // Simulate ChatGPT response
     const botResponse = {
       id: Date.now() + 1,
       content:
@@ -142,6 +136,7 @@ alert("Hello, " + name + "! Welcome to our website!");`,
     setQuestions(newQuestions); // Update questions state
     setShowFormWizard(true); // Show FormWizard with new questions
   }
+  
   return (
     <div className="flex-1 flex flex-col min-w-0">
       <div className="flex items-center p-4">

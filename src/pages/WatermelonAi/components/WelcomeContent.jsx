@@ -17,9 +17,6 @@ const WelcomeContent = ({ handleGenerate }) => (
       </p>
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
         <div className="flex justify-center mb-4">
-          {/* <div className="w-12 h-12 bg-[#7680af] rounded-full flex items-center justify-center">
-            <FiSend className="text-white text-2xl" />
-          </div> */}
         </div>
         <h3 className="text-white text-xl font-semibold mb-2">
           Generate a Better Component
