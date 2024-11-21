@@ -1,7 +1,6 @@
 import ChatMessage from './ChatMessage.jsx';
 
 const ChatContainer = ({ messages }) => {
-  console.log(messages)
   return (
     <div className="flex-1 overflow-y-auto px-4 py-6">
       {messages.map((message) => (

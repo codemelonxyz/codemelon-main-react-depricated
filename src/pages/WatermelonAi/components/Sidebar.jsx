@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FiPlus, FiMenu, FiX, FiDelete } from "react-icons/fi";
 import clsx from "clsx";
 import WatermelonAPI from "../../../services/watermelon.api";
-import { useAuth } from "../../../contexts/AuthContext";
 
 const Sidebar = ({ token, currentId, chats, setCurrentId, setChats }) => {
   const [isOpen, setIsOpen] = useState(false);

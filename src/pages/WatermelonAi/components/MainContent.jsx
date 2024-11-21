@@ -13,7 +13,6 @@ import ChatContainer from "./ChatContainer.jsx"; // Import ChatContainer
 import { useNavigate } from "react-router-dom";
 import WatermelonAPI from "../../../services/watermelon.api.js";
 import { useAuth } from "../../../contexts/AuthContext.jsx";
-import { m } from "framer-motion";
 
 const MainContent = ({ currentId, currentChat }) => {
   const { token } = useAuth();
@@ -21,7 +20,6 @@ const MainContent = ({ currentId, currentChat }) => {
   const { theme } = useContext(ThemeContext);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const [showWelcome, setShowWelcome] = useState(true);
   const [showFormWizard, setShowFormWizard] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -85,6 +83,7 @@ const MainContent = ({ currentId, currentChat }) => {
           currentId,
           token.token
         );
+        console.log(response.chat.data)
         const messages = response.chat.data.map((message) => {
           return {
             id: Date.now() + Math.random(),
@@ -99,7 +98,7 @@ const MainContent = ({ currentId, currentChat }) => {
     catch (error) {
       console.error("Error fetching messages:", error);
     }
-  }, [currentId]);
+  }, [currentId, token.token]);
 
 
   const handleSend = async () => {
@@ -110,7 +109,6 @@ const MainContent = ({ currentId, currentChat }) => {
       token.token,
       inputValue
     );
-    console.log(response.data);
     const userMessage = {
       id: Date.now(),
       content: inputValue,
@@ -127,7 +125,6 @@ const MainContent = ({ currentId, currentChat }) => {
     }, 1000);
 
     setInputValue("");
-    setShowWelcome(false);
   };
 
   const handleKeyPress = (e) => {
@@ -145,16 +142,16 @@ const MainContent = ({ currentId, currentChat }) => {
     navigate(-1);
   };
 
-  const handleFormWizardSubmit = async () => {
+  const handleFormWizardSubmit = async (answers) => {
+    // console.log(answers)
     setShowFormWizard(false);
     setLoading(true);
-    const data = {};
-    const some = await WatermelonAPI.getQuestions(currentId, token.token, data);
+    const some = await WatermelonAPI.getQuestions(currentId, token.token, answers);
     setLoading(false);
     // console.log(some.data)
     const newQuestions = convertQuestions(JSON.parse(some.data));
     setQuestions(newQuestions); // Update questions state
-    setShowFormWizard(true); // Show FormWizard with new questions
+    setShowFormWizard(true);
   };
 
   return (
