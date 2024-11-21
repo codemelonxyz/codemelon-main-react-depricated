@@ -65,7 +65,7 @@ class WatermelonAPI {
           'Content-Type': 'application/json'
         }
       });
-      console.log(response.data)
+      // console.log(response.data)
       return response.data;
     } catch (error) {
       console.error('Error getting chats:', error);
@@ -118,6 +118,24 @@ class WatermelonAPI {
       return response.data;
     } catch (error) {
       console.error('Error getting questions:', error);
+    }
+  }
+
+  static async sendMessage(type, id, token, message) {
+    try {
+      const response = await axios.post(
+        `http://ai.api.codemelon.xyz/api/v1/ai/code/chat/completion?type=${type}&id=${id}`,
+        { message },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Error sending message:', error);
     }
   }
 }
