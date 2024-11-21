@@ -1,55 +1,6 @@
 import axios from 'axios';
 
-// curl --location 'https://ai.api.codemelon.xyz/api/v1/ai/code/generate-key' \
-// --header 'SERVER_KEY: Mun1C3mX70' \
-// --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk5MGMwMDMyLTRmNjEtNDg3OS1iZmNlLWYwMTg5YTU1NWUyZCIsInVzZXJuYW1lIjoiYWRtaW4xMjMiLCJlbWFpbCI6InZhaWRpdHlhLnQyM2NzYWlAbnN0LnJpc2hpaG9vZC5lZHUuaW4iLCJpYXQiOjE3MzIxMDE0OTAsImV4cCI6MTczMjE4Nzg5MH0.rzv31JCF0iQPEhNfbHdi6FoIWccCaJm-CbvaUOpCXfQ' \
-// --data ''
-
-
-// curl --location 'https://ai.api.codemelon.xyz/api/v1/ai/code/get-key' \
-// --header 'SERVER_KEY: Mun1C3mX70' \
-// --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk5MGMwMDMyLTRmNjEtNDg3OS1iZmNlLWYwMTg5YTU1NWUyZCIsInVzZXJuYW1lIjoiYWRtaW4xMjMiLCJlbWFpbCI6InZhaWRpdHlhLnQyM2NzYWlAbnN0LnJpc2hpaG9vZC5lZHUuaW4iLCJpYXQiOjE3MzIxMDE0OTAsImV4cCI6MTczMjE4Nzg5MH0.rzv31JCF0iQPEhNfbHdi6FoIWccCaJm-CbvaUOpCXfQ' \
-// --data ''
-
-
-// curl --location 'https://ai.api.codemelon.xyz/api/v1/ai/code/get-remaining-quota' \
-// --header 'SERVER_KEY: Mun1C3mX70' \
-// --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk5MGMwMDMyLTRmNjEtNDg3OS1iZmNlLWYwMTg5YTU1NWUyZCIsInVzZXJuYW1lIjoiYWRtaW4xMjMiLCJlbWFpbCI6InZhaWRpdHlhLnQyM2NzYWlAbnN0LnJpc2hpaG9vZC5lZHUuaW4iLCJpYXQiOjE3MzIxMDE0OTAsImV4cCI6MTczMjE4Nzg5MH0.rzv31JCF0iQPEhNfbHdi6FoIWccCaJm-CbvaUOpCXfQ' \
-// --data ''
-
-
-// curl --location 'https://ai.api.codemelon.xyz/api/v1/ai/code/chat/create' \
-// --header 'SERVER_KEY: Mun1C3mX70' \
-// --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk5MGMwMDMyLTRmNjEtNDg3OS1iZmNlLWYwMTg5YTU1NWUyZCIsInVzZXJuYW1lIjoiYWRtaW4xMjMiLCJlbWFpbCI6InZhaWRpdHlhLnQyM2NzYWlAbnN0LnJpc2hpaG9vZC5lZHUuaW4iLCJpYXQiOjE3MzIxMDE0OTAsImV4cCI6MTczMjE4Nzg5MH0.rzv31JCF0iQPEhNfbHdi6FoIWccCaJm-CbvaUOpCXfQ' \
-// --data ''
-
-
-// curl --location 'https://ai.api.codemelon.xyz/api/v1/ai/code/chats' \
-// --header 'SERVER_KEY: Mun1C3mX70' \
-// --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk5MGMwMDMyLTRmNjEtNDg3OS1iZmNlLWYwMTg5YTU1NWUyZCIsInVzZXJuYW1lIjoiYWRtaW4xMjMiLCJlbWFpbCI6InZhaWRpdHlhLnQyM2NzYWlAbnN0LnJpc2hpaG9vZC5lZHUuaW4iLCJpYXQiOjE3MzIxMDE0OTAsImV4cCI6MTczMjE4Nzg5MH0.rzv31JCF0iQPEhNfbHdi6FoIWccCaJm-CbvaUOpCXfQ' \
-// --data ''
-
-
-// curl --location --request DELETE 'https://ai.api.codemelon.xyz/api/v1/ai/code/chat/delete?id=01286e5f-23f3-4189-bc8d-3c613ef48aba' \
-// --header 'SERVER_KEY: Mun1C3mX70' \
-// --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk5MGMwMDMyLTRmNjEtNDg3OS1iZmNlLWYwMTg5YTU1NWUyZCIsInVzZXJuYW1lIjoiYWRtaW4xMjMiLCJlbWFpbCI6InZhaWRpdHlhLnQyM2NzYWlAbnN0LnJpc2hpaG9vZC5lZHUuaW4iLCJpYXQiOjE3MzIxMDE0OTAsImV4cCI6MTczMjE4Nzg5MH0.rzv31JCF0iQPEhNfbHdi6FoIWccCaJm-CbvaUOpCXfQ' \
-// --data ''
-
-
-// curl --location 'https://ai.api.codemelon.xyz/api/v1/ai/code/chat/getQuestions?id=null' \
-// --header 'SERVER_KEY: Mun1C3mX70' \
-// --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk5MGMwMDMyLTRmNjEtNDg3OS1iZmNlLWYwMTg5YTU1NWUyZCIsInVzZXJuYW1lIjoiYWRtaW4xMjMiLCJlbWFpbCI6InZhaWRpdHlhLnQyM2NzYWlAbnN0LnJpc2hpaG9vZC5lZHUuaW4iLCJpYXQiOjE3MzIxMDE0OTAsImV4cCI6MTczMjE4Nzg5MH0.rzv31JCF0iQPEhNfbHdi6FoIWccCaJm-CbvaUOpCXfQ' \
-// --header 'Content-Type: application/json' \
-// --data '{ 
-//     "language" : "js", 
-//     "framework": "React Js",
-//     "uiLibrary" : "Material", 
-//     "componentType" : "Card"
-// }'
-
 class WatermelonAPI {
-
-  // key generate karega
   static async generateKey(token) {
     try {
       const response = await axios.get(`http://ai.api.codemelon.xyz/api/v1/ai/code/generate-key`, {
@@ -58,10 +9,9 @@ class WatermelonAPI {
           'Content-Type': 'application/json'
         }
       });
-      // console.log(response)
       return response.data;
     } catch (error) {
-      // console.error('Error generating key:', error);
+      console.log("key already exists")
     }
   }
 
@@ -115,7 +65,7 @@ class WatermelonAPI {
           'Content-Type': 'application/json'
         }
       });
-      console.log(response.data)
+      // console.log(response.data)
       return response.data;
     } catch (error) {
       console.error('Error getting chats:', error);
@@ -168,6 +118,24 @@ class WatermelonAPI {
       return response.data;
     } catch (error) {
       console.error('Error getting questions:', error);
+    }
+  }
+
+  static async sendMessage(type, id, token, message) {
+    try {
+      const response = await axios.post(
+        `http://ai.api.codemelon.xyz/api/v1/ai/code/chat/completion?type=${type}&id=${id}`,
+        { message },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Error sending message:', error);
     }
   }
 }

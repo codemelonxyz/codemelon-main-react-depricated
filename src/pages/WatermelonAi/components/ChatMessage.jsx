@@ -20,7 +20,7 @@ const ChatMessage = ({ isUser, content, codeSnippet }) => {
         </div>
         {isUser && (
           <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center ml-2 flex-shrink-0">
-            <span className="text-white text-sm">You</span>
+            <span className="text-white text-sm">Y</span>
           </div>
         )}
       </div>

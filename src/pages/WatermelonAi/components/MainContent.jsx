@@ -1,36 +1,27 @@
 import { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "../../../ThemeContext.js";
 import { MultiStepLoader as Loader } from "../../../components/ui/multi-step-loader.jsx";
-import { IconSquareRoundedX, IconRobotFace, IconChevronLeft } from "@tabler/icons-react"; // Import back icon
+import {
+  IconSquareRoundedX,
+  IconRobotFace,
+  IconChevronLeft,
+} from "@tabler/icons-react"; // Import back icon
 import WelcomeContent from "./WelcomeContent.jsx";
 import InputArea from "./InputArea.jsx";
 import { FormWizard } from "../../../components/FormWizard/FormWizard.jsx";
 import ChatContainer from "./ChatContainer.jsx"; // Import ChatContainer
 import { useNavigate } from "react-router-dom";
 import WatermelonAPI from "../../../services/watermelon.api.js";
-import {useAuth} from '../../../contexts/AuthContext.jsx';
+import { useAuth } from "../../../contexts/AuthContext.jsx";
 
-const MainContent = () => {
-  const { token, logout } = useAuth();
+const MainContent = ({ currentId, currentChat }) => {
+  const { token } = useAuth();
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
-  const [messages, setMessages] = useState([]); // Corrected 'message' to 'messages'
+  const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const [showWelcome, setShowWelcome] = useState(true);
   const [showFormWizard, setShowFormWizard] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [currentId, setCurrentId] = useState('');
-
-  useEffect(() => {
-    const fetchChats = async () => {
-      const chats = await WatermelonAPI.createChat(token.token);
-      console.log("this",chats)
-      setCurrentId(chats.chat_id);
-    };
-    fetchChats();
-  }, [])
-
-  // logout();
 
   const loadingStates = [
     {
@@ -77,43 +68,63 @@ const MainContent = () => {
         id: index + 1,
         name: key,
         text: jsonObject[key],
-        type: "text", // Assuming all questions are of type "text". Adjust if needed.
-        placeholder: "", // Placeholder can be set if provided or required.
-        required: true // Assuming all questions are required. Adjust if needed.
+        type: "text",
+        placeholder: "",
+        required: true,
       };
     });
   };
 
-  const handleSend = () => {
-    if (!inputValue.trim()) return;
+  useEffect(() => {
+    try{
+      const getMessages = async () => {
+        if (!currentId) return;
+        const response = await WatermelonAPI.getChat(
+          currentId,
+          token.token
+        );
+        console.log(response.chat.data)
+        const messages = response.chat.data.map((message) => {
+          return {
+            id: Date.now() + Math.random(),
+            content: message.watermelon || message.user,
+            isUser: !message.watermelon,
+          };
+        });
+        setMessages(messages);
+      };
+      getMessages();
+    }
+    catch (error) {
+      console.error("Error fetching messages:", error);
+    }
+  }, [currentId, token.token]);
 
-    // Add user message
+
+  const handleSend = async () => {
+    if (!inputValue.trim()) return;
+    const response = await WatermelonAPI.sendMessage(
+      "codePrompt",
+      currentId,
+      token.token,
+      inputValue
+    );
     const userMessage = {
       id: Date.now(),
       content: inputValue,
       isUser: true,
     };
     setMessages((prev) => [...prev, userMessage]);
-
-    // Simulate ChatGPT response
     const botResponse = {
       id: Date.now() + 1,
-      content:
-        "Sure, here's a simple JavaScript code snippet that prompts the user for their name and then greets them:",
+      content: response.data,
       isUser: false,
-      codeSnippet: `// Prompt the user for their name
-var name = prompt("What's your name?");
-
-// Greet the user
-alert("Hello, " + name + "! Welcome to our website!");`,
     };
-
     setTimeout(() => {
       setMessages((prev) => [...prev, botResponse]);
     }, 1000);
 
     setInputValue("");
-    setShowWelcome(false);
   };
 
   const handleKeyPress = (e) => {
@@ -131,24 +142,25 @@ alert("Hello, " + name + "! Welcome to our website!");`,
     navigate(-1);
   };
 
-  const handleFormWizardSubmit = async () => {
+  const handleFormWizardSubmit = async (answers) => {
+    // console.log(answers)
     setShowFormWizard(false);
     setLoading(true);
-    const data = {}
-    const some = await WatermelonAPI.getQuestions(currentId, token.token, data);
+    const some = await WatermelonAPI.getQuestions(currentId, token.token, answers);
     setLoading(false);
-    console.log(some.data)
+    // console.log(some.data)
     const newQuestions = convertQuestions(JSON.parse(some.data));
     setQuestions(newQuestions); // Update questions state
-    setShowFormWizard(true); // Show FormWizard with new questions
-  }
+    setShowFormWizard(true);
+  };
+
   return (
     <div className="flex-1 flex flex-col min-w-0">
       <div className="flex items-center p-4">
         <button onClick={handleBack}>
           <IconChevronLeft className="h-6 w-6 text-white" />
         </button>
-        <h1 className="ml-2 text-lg font-semibold text-white">this {currentId}</h1>
+        <h1 className="ml-2 text-lg font-semibold text-white">{currentId}</h1>
       </div>
       <Loader loadingStates={loadingStates} loading={loading} duration={2000} />
       {showFormWizard ? (
@@ -159,8 +171,11 @@ alert("Hello, " + name + "! Welcome to our website!");`,
           onSubmit={handleFormWizardSubmit}
           theme={theme}
         />
-      ) : !loading && messages.length === 0 && (
-        <WelcomeContent handleGenerate={handleGenerate} />
+      ) : (
+        !loading &&
+        messages.length === 0 && (
+          <WelcomeContent handleGenerate={handleGenerate} />
+        )
       )}
       {!loading && messages.length > 0 && (
         <ChatContainer messages={messages} /> // Use ChatContainer to display messages
@@ -184,4 +199,3 @@ alert("Hello, " + name + "! Welcome to our website!");`,
 };
 
 export default MainContent;
-
