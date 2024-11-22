@@ -10,6 +10,7 @@ const ChatContainer = ({ messages }) => {
           isUser={message.isUser}
           content={`"${JSON.stringify(message.content, null, 4)}"`}
           codeSnippet={message.codeSnippet}
+          className="animate-fade-in"
         />
       ))}
     </div>
