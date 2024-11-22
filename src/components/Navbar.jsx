@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../ThemeContext';
+import { useAuth } from '../contexts/AuthContext';
 
 function Navbar() {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -11,6 +12,7 @@ function Navbar() {
   const modalRef = useRef(null);
   const buttonRef = useRef(null);
   const navigate = useNavigate();
+  const { isAuthenticated, user } = useAuth();
 
   const navClass =
     theme === 'dark' ? 'bg-neutral-950 text-white' : 'bg-white text-black';
@@ -37,22 +39,19 @@ function Navbar() {
         buttonRef.current &&
         !buttonRef.current.contains(event.target)
       ) {
-        if (isOpen) {
-          handleMenuToggle();
-        }
+        setClosing(true);
+        setTimeout(() => {
+          setIsOpen(false);
+          setClosing(false);
+        }, 700);
       }
     };
 
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isOpen]);
+  }, []);
 
   return (
     <nav
@@ -84,8 +83,8 @@ function Navbar() {
         <button className="animate-slide-in-right" style={{ animationDelay: '0.2s' }}>
           About Us
         </button>
-        <button className="animate-slide-in-right" style={{ animationDelay: '0.3s' }}>
-          Something
+        <button className="animate-slide-in-right cursor-pointer" style={{ animationDelay: '0.3s' }} onClick={() => { navigate("/waitlist") }}>
+          Watermelon
         </button>
         {/* Privacy policy and cookie policy button */}
         {/*  */}
@@ -97,29 +96,42 @@ function Navbar() {
         </button> */}
         {/* Login Button */}
         
-        <button
-          className={`animate-slide-in-right px-4 py-2 rounded ${
-            theme === 'dark'
-              ? 'bg-gray-700 hover:bg-gray-600'
-              : 'bg-slate-300 hover:bg-gray-600 hover:text-white' // Reverted to original colors
-          }`}
-          style={{ animationDelay: '0.5s' }}
-          onClick={() => navigate('/login')}
-        >
-          Log In
-        </button>
-        {/* Signup Button */}
-        <button
-          className={`animate-slide-in-right px-4 py-2 rounded ${
-            theme === 'dark'
-              ? 'bg-blue-600 hover:bg-blue-500 text-white'
-              : 'bg-blue-600 hover:bg-blue-500 text-white' // Reverted to original colors
-          }`}
-          style={{ animationDelay: '0.6s' }}
-          onClick={() => navigate('/auth/signup')}
-        >
-          Sign Up
-        </button>
+        {isAuthenticated ? (
+          // Show profile circle with first letter of email
+          <div className="flex items-center">
+            <div className="h-8 w-8 rounded-full bg-gray-500 flex items-center justify-center">
+              <span className="text-white font-medium">
+                {user.email.charAt(0).toUpperCase()}
+              </span>
+            </div>
+          </div>
+        ) : (
+          // Show login and signup buttons
+          <>
+            <button
+              className={`animate-slide-in-right ml-4 px-4 py-2 rounded ${
+                theme === 'dark'
+                  ? 'bg-gray-700 hover:bg-gray-600'
+                  : 'bg-slate-300 hover:bg-gray-600 hover:text-white'
+              }`}
+              style={{ animationDelay: '0.5s' }}
+              onClick={() => navigate('/auth?q=login')}
+            >
+              Log In
+            </button>
+            <button
+              className={`animate-slide-in-right ml-2 px-4 py-2 rounded ${
+                theme === 'dark'
+                  ? 'bg-blue-600 hover:bg-blue-500 text-white'
+                  : 'bg-blue-600 hover:bg-blue-500 text-white'
+              }`}
+              style={{ animationDelay: '0.6s' }}
+              onClick={() => navigate('/auth?q=signup')}
+            >
+              Sign Up
+            </button>
+          </>
+        )}
 
         {/*  */}
         {/* Button of dark and light in the navbar */}
@@ -157,34 +169,49 @@ function Navbar() {
           </button>
           <button
             className="block w-full text-left px-4 py-2 hover:bg-opacity-75"
-            onClick={() => navigate('/something')}
+            onClick={() => navigate('/waitlist')}
           >
-            Something
+            Watermelon
           </button>
-          {/* Login Button */}
-          <button
-            className={`animate-slide-in-right ml-4 px-4 py-2 rounded ${
-              theme === 'dark'
-                ? 'bg-gray-700 hover:bg-gray-600'
-                : 'bg-slate-300 hover:bg-gray-600 hover:text-white' // Reverted to original colors
-            }`}
-            style={{ animationDelay: '0.5s' }}
-            onClick={() => navigate('/login')}
-          >
-            Log In
-          </button>
-          {/* Signup Button */}
-          <button
-            className={`animate-slide-in-right ml-2 px-4 py-2 rounded ${
-              theme === 'dark'
-                ? 'bg-blue-600 hover:bg-blue-500 text-white'
-                : 'bg-blue-600 hover:bg-blue-500 text-white' // Reverted to original colors
-            }`}
-            style={{ animationDelay: '0.6s' }}
-            onClick={() => navigate('/auth/signup')}
-          >
-            Sign Up
-          </button>
+          {/* Login/Profile Button */}
+          {isAuthenticated ? (
+            <button
+              className={`animate-slide-in-right ml-4 px-4 py-2 rounded ${
+                theme === 'dark'
+                  ? 'bg-gray-700 hover:bg-gray-600'
+                  : 'bg-slate-300 hover:bg-gray-600 hover:text-white'
+              }`}
+              style={{ animationDelay: '0.5s' }}
+              onClick={() => navigate('/profile')}
+            >
+              Profile
+            </button>
+          ) : (
+            <>
+              <button
+                className={`animate-slide-in-right ml-4 px-4 py-2 rounded ${
+                  theme === 'dark'
+                    ? 'bg-gray-700 hover:bg-gray-600'
+                    : 'bg-slate-300 hover:bg-gray-600 hover:text-white'
+                }`}
+                style={{ animationDelay: '0.5s' }}
+                onClick={() => navigate('/auth?q=login')}
+              >
+                Log In
+              </button>
+              <button
+                className={`animate-slide-in-right ml-2 px-4 py-2 rounded ${
+                  theme === 'dark'
+                    ? 'bg-blue-600 hover:bg-blue-500 text-white'
+                    : 'bg-blue-600 hover:bg-blue-500 text-white'
+                }`}
+                style={{ animationDelay: '0.6s' }}
+                onClick={() => navigate('/auth?q=signup')}
+              >
+                Sign Up
+              </button>
+            </>
+          )}
           {/* Theme Toggle Button */}
           <button
             className="block w-full text-left px-4 py-2 mt-2 items-center rounded focus:outline-none"

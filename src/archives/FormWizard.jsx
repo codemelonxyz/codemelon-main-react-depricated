@@ -1,9 +1,9 @@
-import React, { useState, useRef, useContext } from 'react'; // Added useContext
-import { ThemeContext } from '../ThemeContext'; // Import ThemeContext
+import React, { useState, useRef, useContext } from 'react';
+import { ThemeContext } from '../ThemeContext';
 import { NavigationButtons } from './NavigationButtons';
 import { QuestionInput } from './QuestionInput';
 import { ProgressIndicator } from './ProgressIndicator';
-import { ProgressBar } from './ProgressBar'; // Import ProgressBar
+import { ProgressBar } from './ProgressBar';
 import { Send } from 'lucide-react';
 
 export function FormWizard({ questions, onSubmit, navFooter }) {

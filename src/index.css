@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .sm-w-95vw {
+    width: calc(95vw);
+  }
+  .xl-w-65vw {
+    width: calc(65vw);
+  }
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ThemeContext } from '../ThemeContext';
-import { Eye, EyeOff, Moon, Sun, UserCircle2, Mail, Lock, ArrowRight } from 'lucide-react';
+import { Moon, Sun, UserCircle2 } from 'lucide-react';
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { BackgroundBeams } from '../components/ui/background-beams';
 import LoginForm from '../components/LoginForm';
@@ -8,18 +8,11 @@ import RegisterForm from '../components/RegisterForm';
 
 function AuthPage() {
     const { theme, setTheme } = useContext(ThemeContext);
-    const [isDark, setIsDark] = useState(theme != 'dark' ? false : true);
+    const [isDark, setIsDark] = useState(theme !== 'dark' ? false : true);
     const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const paramValue = searchParams.get('q');
   const [isLogin, setIsLogin] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
     
     useEffect(() => {
         if (paramValue === 'login') {
@@ -39,11 +32,6 @@ function AuthPage() {
     useEffect(() => {
         navigate(`/auth?q=${isLogin ? 'login' : 'register'}`);
     }, [isLogin, navigate]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-  };
 
   return (
     <div className={`min-h-screen w-full transition-colors duration-300 ${
