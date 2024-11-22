@@ -22,6 +22,7 @@ const MainContent = ({ currentId, currentChat }) => {
   const [inputValue, setInputValue] = useState("");
   const [showFormWizard, setShowFormWizard] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showComponent, setShowComponent] = useState(false);
 
   const loadingStates = [
     {
@@ -143,15 +144,38 @@ const MainContent = ({ currentId, currentChat }) => {
   };
 
   const handleFormWizardSubmit = async (answers) => {
-    // console.log(answers)
     setShowFormWizard(false);
     setLoading(true);
-    const some = await WatermelonAPI.getQuestions(currentId, token.token, answers);
+    if (showComponent) {
+      const response = await WatermelonAPI.sendMessage(
+        "questionPrompt",
+        currentId,
+        token.token,
+        answers
+      );
+      const userMessage = {
+        id: Date.now(),
+        content: answers,
+        isUser: true,
+      };
+      const botMessage = {
+        id: Date.now() + 1,
+        content: response.data,
+        isUser: false,
+      };
+      setMessages((prev) => [...prev, userMessage, botMessage]);
+    } else {
+      const questionsResponse = await WatermelonAPI.getQuestions(
+        currentId,
+        token.token,
+        answers
+      );
+      const newQuestions = convertQuestions(JSON.parse(questionsResponse.data));
+      setQuestions(newQuestions);
+      setShowFormWizard(true);
+    }
     setLoading(false);
-    // console.log(some.data)
-    const newQuestions = convertQuestions(JSON.parse(some.data));
-    setQuestions(newQuestions); // Update questions state
-    setShowFormWizard(true);
+    setShowComponent(true);
   };
 
   return (
@@ -171,6 +195,8 @@ const MainContent = ({ currentId, currentChat }) => {
           onSubmit={handleFormWizardSubmit}
           theme={theme}
         />
+      ) : showComponent ? (
+        <ChatContainer messages={messages} />
       ) : (
         !loading &&
         messages.length === 0 && (
