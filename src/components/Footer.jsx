@@ -13,7 +13,7 @@ function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-between">
           {/* About Section */}
-          <div className="w-full sm:w-1/2 md:w-1/4 mb-6">
+          {/* <div className="w-full sm:w-1/2 md:w-1/4 mb-6">
             <h3 className="text-lg font-semibold mb-4">About</h3>
             <ul>
               <li className="mb-2">
@@ -32,19 +32,19 @@ function Footer() {
                   Team
                 </button>
               </li>
-              {/* <li className="mb-2">
+              <li className="mb-2">
                 <button
                   onClick={() => navigate("/careers")}
                   className="hover:underline"
                 >
                   Careers
                 </button>
-              </li> */}
+              </li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Services Section */}
-          <div className="w-full sm:w-1/2 md:w-1/4 mb-6">
+          {/* <div className="w-full sm:w-1/2 md:w-1/4 mb-6">
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul>
               <li className="mb-2">
@@ -55,14 +55,14 @@ function Footer() {
                   Project Creator
                 </button>
               </li>
-              {/* <li className="mb-2">
+              <li className="mb-2">
                 <button
                   onClick={() => navigate("/services/consulting")}
                   className="hover:underline"
                 >
                   Consulting
                 </button>
-              </li> */}
+              </li>
               <li className="mb-2">
                 <button
                   onClick={() => navigate("/services/support")}
@@ -72,7 +72,7 @@ function Footer() {
                 </button>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Resources Section */}
           {/* <div className="w-full sm:w-1/2 md:w-1/4 mb-6">
@@ -106,7 +106,7 @@ function Footer() {
           </div> */}
 
           {/* Legal Section */}
-          <div className="w-full sm:w-1/2 md:w-1/4 mb-6">
+          {/* <div className="w-full sm:w-1/2 md:w-1/4 mb-6">
             <h3 className="text-lg font-semibold mb-4">Legal</h3>
             <ul>
               <li className="mb-2">
@@ -134,8 +134,8 @@ function Footer() {
                 </button>
               </li>
             </ul>
-          </div>
-        </div>
+          </div> */}
+        </div> 
         {/* Bottom Footer */}
         <div className="mt-8 border-t pt-4 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm">
