@@ -30,7 +30,7 @@ export function Waitlist() {
   const handleJoin = async () => {
     try {
       if (!token) {
-        navigate("/login");
+        navigate("/auth");
         return;
       }
       const response = await waitlistApi.joinWaitlist(token.token);
