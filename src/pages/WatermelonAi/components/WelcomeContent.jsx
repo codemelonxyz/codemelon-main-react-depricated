@@ -27,7 +27,7 @@ const WelcomeContent = ({ handleGenerate }) => (
         </p>
         <div className="flex justify-center">
           <button
-            className="bg-[#7680af] text-white px-4 py-2 rounded-full hover:bg-[#525c8c] flex items-center justify-center"
+            className="  text-white px-4 py-2 rounded-full hover:bg-[#525c8c] flex items-center justify-center"
             onClick={handleGenerate}
           >
             <span className="mr-2">Generate</span>

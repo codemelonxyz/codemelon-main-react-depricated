@@ -62,13 +62,7 @@ export default function RegisterForm({ isDark }) {
         throw new Error(data.error || 'Registration failed');
       }
 
-      setAuthToken({
-        token: data.token,
-        type: data.token_type,
-        expiresIn: data.token_expires_in
-      });
-
-      navigate('/home');
+      navigate('/auth');
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to register. Please try again later.');
     } finally {

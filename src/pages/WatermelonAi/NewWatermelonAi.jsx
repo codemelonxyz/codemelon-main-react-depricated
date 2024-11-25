@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import Sidebar from "./components/Sidebar.jsx";
 import MainContent from "./components/MainContent.jsx";
 import { BackgroundBeams } from "../../components/ui/background-beams.jsx";
@@ -46,7 +47,12 @@ const WatermelonAi = () => {
 
   return (
     <div className="h-[100vh] w-[100vw]">
-      <div className="bg-neutral-950 h-full overflow-hidden shadow-2xl flex flex-col sm:flex-row">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="bg-neutral-950 h-full overflow-hidden shadow-2xl flex flex-col sm:flex-row"
+      >
         <Sidebar
           setChats={setChats}
           token={token}
@@ -56,7 +62,7 @@ const WatermelonAi = () => {
           setCurrentId={setCurrentId}
         />
         <MainContent currentId={currentId} currentChat={currentChat} />
-      </div>
+      </motion.div>
       {theme === "dark" && <BackgroundBeams />}
     </div>
   );
