@@ -1,5 +1,6 @@
 "use client";
 import React, { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { BackgroundBeams } from "../components/ui/background-beams";
 import { Cover } from "../components/ui/cover";
 import { ThemeContext } from "../ThemeContext";
@@ -7,6 +8,7 @@ import waitlistApi from "../services/waitlist.api";
 import { useAuth } from "../contexts/AuthContext";
 
 export function Waitlist() {
+  const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
   const [joined, setJoined] = useState(false);
   const { token } = useAuth();
@@ -27,6 +29,10 @@ export function Waitlist() {
 
   const handleJoin = async () => {
     try {
+      if (!token) {
+        navigate("/auth");
+        return;
+      }
       const response = await waitlistApi.joinWaitlist(token.token);
       console.log(response);
       setJoined(true);
