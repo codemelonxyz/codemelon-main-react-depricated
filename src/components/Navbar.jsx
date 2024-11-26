@@ -77,10 +77,10 @@ function Navbar() {
 
       {/* Desktop menu */}
       <div className="hidden md:flex space-x-4 items-center">
-        <button className="animate-slide-in-right" style={{ animationDelay: '0.1s' }}>
+        <button className="animate-slide-in-right" style={{ animationDelay: '0.1s' }} onClick={() => navigate('/home')}>
           Home
         </button>
-        <button className="animate-slide-in-right" style={{ animationDelay: '0.2s' }}>
+        <button className="animate-slide-in-right" style={{ animationDelay: '0.2s' }} onClick={() => navigate('/about')}>
           About Us
         </button>
         <button className="animate-slide-in-right cursor-pointer" style={{ animationDelay: '0.3s' }} onClick={() => { navigate("/waitlist") }}>
